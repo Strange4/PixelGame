@@ -6,10 +6,6 @@ import game.util.Vector2D;
 
 public class MovementHandler implements KeyListener {
     private Vector2D directional2DVector = new Vector2D(0, 0);
-    private final int UP = 87;
-    private final int DOWN = 83;
-    private final int RIGHT = 65;
-    private final int LEFT = 68;
     private Keyboard keyboard;
 
     public MovementHandler(Keyboard keyboard) {
@@ -23,19 +19,19 @@ public class MovementHandler implements KeyListener {
         Key[] pressed = keyboard.getPressedKeys();
         for (Key key : pressed) {
             switch (key.getKeyCode()) {
-            case UP:
+            case KeyEvent.VK_W:
                 // System.out.println("UP");
                 this.directional2DVector.addX(this.directional2DVector.getX() - 1);
                 break;
-            case DOWN:
+            case KeyEvent.VK_S:
                 // System.out.println("DOWN");
                 this.directional2DVector.addX(this.directional2DVector.getX() + 1);
                 break;
-            case RIGHT:
+            case KeyEvent.VK_D:
                 // System.out.println("RIGHT");
                 this.directional2DVector.addY(this.directional2DVector.getY() + 1);
                 break;
-            case LEFT:
+            case KeyEvent.VK_A:
                 // System.out.println("LEFT");
                 this.directional2DVector.addY(this.directional2DVector.getY() - 1);
                 break;

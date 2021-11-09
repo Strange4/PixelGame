@@ -1,12 +1,12 @@
 package game;
 
-import game.keyboard.KeyList;
 import game.keyboard.Keyboard;
 import game.keyboard.MovementHandler;
 import game.states.GameStateManager;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
 import game.util.Vector2D;
+import java.awt.event.KeyEvent;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -32,7 +32,7 @@ public class GameCanvas extends Canvas implements Runnable {
         setFocusable(true);
         setVisible(true);
         // Keyboard Events Handler
-        this.keyboard = new Keyboard(KeyList.KEY_A, KeyList.KEY_S, KeyList.KEY_D, KeyList.KEY_W);
+        this.keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D);
         this.moveHandler = new MovementHandler(keyboard);
         addKeyListener(this.moveHandler);
     }
