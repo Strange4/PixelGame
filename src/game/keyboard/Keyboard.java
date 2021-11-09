@@ -1,9 +1,11 @@
+package game.keyboard;
+
 import java.util.ArrayList;
 
 public class Keyboard extends ArrayList<Key> {
     public Key[] acceptedKeys;
 
-    public Keyboard(int[] acceptedKeys) {
+    public Keyboard(int... acceptedKeys) {
         this.acceptedKeys = new Key[acceptedKeys.length];
         for (int i = 0; i < this.acceptedKeys.length; i++) {
             this.acceptedKeys[i] = new Key(acceptedKeys[i]);

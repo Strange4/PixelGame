@@ -1,3 +1,5 @@
+package game.keyboard;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import game.util.Vector2D;

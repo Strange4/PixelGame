@@ -1,3 +1,5 @@
+package game.keyboard;
+
 public class Key {
     private final int keyCode;
     private boolean isPressed;

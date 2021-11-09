@@ -1,8 +1,12 @@
 package game;
 
+import game.keyboard.KeyList;
+import game.keyboard.Keyboard;
+import game.keyboard.MovementHandler;
 import game.states.GameStateManager;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
+import game.util.Vector2D;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -28,7 +32,7 @@ public class GameCanvas extends Canvas implements Runnable {
         setFocusable(true);
         setVisible(true);
         // Keyboard Events Handler
-        this.keyboard = new Keyboard(acceptedControls);
+        this.keyboard = new Keyboard(KeyList.KEY_A, KeyList.KEY_S, KeyList.KEY_D, KeyList.KEY_W);
         this.moveHandler = new MovementHandler(keyboard);
         addKeyListener(this.moveHandler);
     }
@@ -46,7 +50,7 @@ public class GameCanvas extends Canvas implements Runnable {
         running = true;
         createBufferStrategy(3);
         mouse = new MouseHandler();
-        key = new KeyHandler();
+        //key = new KeyHandler();
         gsm = new GameStateManager();
         bs = getBufferStrategy();
     }
@@ -78,7 +82,8 @@ public class GameCanvas extends Canvas implements Runnable {
             // number of updates are done
             while ((now - lastUpdateTime) > MIN_TIME_BEFORE_UPDATE && (updateCount < MIN_UPDATES_BEFORE_RENDER)) {
                 update();
-                input(mouse, key);
+                input();
+                //input(mouse, key);
                 lastUpdateTime += MIN_TIME_BEFORE_UPDATE;
                 updateCount++;
             }
@@ -86,7 +91,7 @@ public class GameCanvas extends Canvas implements Runnable {
             if (now - lastUpdateTime > MIN_TIME_BEFORE_UPDATE) {
                 lastUpdateTime = now - MIN_TIME_BEFORE_UPDATE;
             }
-            input(mouse, key);
+            input();
             render();
             draw();
 
@@ -104,16 +109,16 @@ public class GameCanvas extends Canvas implements Runnable {
                 lastSecond = thisSecond;
             }
             // sets the max frame count and lets the computer breath before looping again
-            // while (((now - lastRenderTime) < TOTAL_TIME_BEFORE_RENDER) && ((now -
-            // lastUpdateTime) < MIN_TIME_BEFORE_UPDATE) ){
-            // Thread.yield();
-            // try {
-            // Thread.sleep(1);
-            // } catch (InterruptedException e) {
-            // e.printStackTrace();
-            // }
-            // now = System.nanoTime();
-            // }
+//             while (((now - lastRenderTime) < TOTAL_TIME_BEFORE_RENDER) && ((now -
+//             lastUpdateTime) < MIN_TIME_BEFORE_UPDATE) ){
+//             Thread.yield();
+//             try {
+//             Thread.sleep(1);
+//             } catch (InterruptedException e) {
+//             e.printStackTrace();
+//             }
+//             now = System.nanoTime();
+//             }
         }
     }
 
@@ -138,8 +143,12 @@ public class GameCanvas extends Canvas implements Runnable {
      * @param mouse the mouse handler of the canvas
      * @param key   the key handler of the canvas
      */
-    private void input(MouseHandler mouse, KeyHandler key) {
-        gsm.input(mouse, key);
+    private void input() {
+        //gsm.input(mouse, key);
+        Vector2D v = this.moveHandler.getDirectional2DVector();
+        if (v.getX() != 0 || v.getY() != 0) {
+            System.out.println(v);
+        }
     }
 
     /**
@@ -148,7 +157,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private void render() {
         Graphics2D graphics = (Graphics2D) bs.getDrawGraphics();
         graphics.fillRect(0, 0, width, height);
-        gsm.render(graphics, 5);
+        //gsm.render(graphics, 5);
         graphics.dispose();
         bs.show();
     }
