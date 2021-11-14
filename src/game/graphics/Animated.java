@@ -19,18 +19,11 @@ public abstract class Animated {
     }
 
     private void loadAnimations(){
-
         if(this.spriteSheet.isSpritesByColumn()){
             for(int i=0;i<animations.length;i++){
-                BufferedImage[] frames = new BufferedImage[spriteSheet.getColumn(currentAnimation).size()];
-                frames = spriteSheet.getColumn(currentAnimation).toArray(frames);
+                BufferedImage[] frames = new BufferedImage[spriteSheet.getAnimationFrames(i).size()];
+                frames = spriteSheet.getAnimationFrames(i).toArray(frames);
                 animations[i] = new Animation(frames, 10);
-            }
-        }else{
-            for(int i=0;i<animations.length;i++){
-                BufferedImage[] frames = new BufferedImage[spriteSheet.getRow(currentAnimation).size()];
-                frames = spriteSheet.getRow(currentAnimation).toArray(frames);
-                animations[i] = new Animation(frames, 100);
             }
         }
     }

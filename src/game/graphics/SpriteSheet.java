@@ -145,26 +145,13 @@ public class SpriteSheet {
         return dimensions;
     }
 
-    public ArrayList<BufferedImage> getRow(int row) {
-        if(this.spritesByColumn){
-            ArrayList<BufferedImage> singleRow = new ArrayList<>();
-            for(ArrayList<BufferedImage> arrayList : ALL_SPRITES){
-                singleRow.add(arrayList.get(row));
-            }
-            return singleRow;
-        }
-        return ALL_SPRITES.get(row);
-    }
-
-    public ArrayList<BufferedImage> getColumn(int column){
-        if(this.spritesByColumn){
-            return ALL_SPRITES.get(column);
-        }
-        ArrayList<BufferedImage> singleColumn = new ArrayList<>();
-        for(ArrayList<BufferedImage> arrayList : ALL_SPRITES){
-            singleColumn.add(arrayList.get(column));
-        }
-        return singleColumn;
+    /**
+     * gets the animation frames from a single animation in the spritesheet
+     * @param animationNumber the position of the animation in the spritesheet starting from 0
+     * @return an arrayList containing the Frames of the animation
+     */
+    public ArrayList<BufferedImage> getAnimationFrames(int animationNumber){
+        return ALL_SPRITES.get(animationNumber);
     }
 
     public boolean isSpritesByColumn() {
