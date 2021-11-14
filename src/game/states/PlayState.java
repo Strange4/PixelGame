@@ -15,7 +15,7 @@ public class PlayState extends GameState{
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        sprite = new SpriteSheet("Bot Wheel/ken.png", 66, 80, false, false);
+        sprite = new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false);
         entity = new Player(sprite);
     }
 
