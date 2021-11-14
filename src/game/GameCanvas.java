@@ -157,7 +157,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private void render() {
         Graphics2D graphics = (Graphics2D) bs.getDrawGraphics();
         graphics.fillRect(0, 0, width, height);
-        //gsm.render(graphics, 5);
+        gsm.render(graphics, 5);
         graphics.dispose();
         bs.show();
     }

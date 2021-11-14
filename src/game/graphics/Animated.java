@@ -23,19 +23,17 @@ public abstract class Animated {
     }
 
     private void loadAnimations(){
-        if(this.spriteSheet.isSpritesByColumn()){
-            for(int i=0;i<animations.length;i++){
-                BufferedImage[] frames = new BufferedImage[spriteSheet.getAnimationFrames(i).size()];
-                frames = spriteSheet.getAnimationFrames(i).toArray(frames);
-                animations[i] = new Animation(frames, 10);
-            }
+        for(int i=0;i<animations.length;i++){
+            BufferedImage[] frames = new BufferedImage[spriteSheet.getAnimationFrames(i).size()];
+            frames = spriteSheet.getAnimationFrames(i).toArray(frames);
+            animations[i] = new Animation(frames, 10);
         }
     }
 
     public void updateAnimation(){
-    //TODO: set the current frame of all the other animations to 0 when changing animations
         animations[currentAnimation].update();
     }
+    //TODO: set the current frame of all the other animations to 0 when changing animations
     public void changeAnimation(int row){
         this.currentAnimation = row;
     }
