@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SpriteSheet {
     private final BufferedImage SPRITESHEET;
-    private ArrayList<ArrayList<BufferedImage>> ALL_SPRITES; // row by Row
+    private ArrayList<ArrayList<BufferedImage>> ALL_SPRITES;
     private final int SPRITE_WIDTH;
     private final int SPRITE_HEIGHT;
     private int SPRITE_COL_COUNT;
@@ -59,8 +59,6 @@ public class SpriteSheet {
                     BufferedImage sprite = getSprite(row, column);
                     if(sprite != null){
                         ALL_SPRITES.get(column).add(getSprite(row, column));
-                    } else {
-                        System.out.println("the sprite is emtpy");
                     }
                 }
             }
@@ -72,13 +70,25 @@ public class SpriteSheet {
                     BufferedImage sprite = getSprite(row, column);
                     if(sprite != null) {
                         ALL_SPRITES.get(row).add(getSprite(row, column));
-                        System.out.println("the sprite is not empty");
                     }
                 }
-                System.out.println(ALL_SPRITES.get(row).size());
             }
         }
 
+    }
+
+    /**
+     * checks if all the pixels of an image are transparent
+     * @param image the image to check
+     * @return returns true if all the pixels of an image are transparent, false otherwise
+     */
+    private boolean imageIsEmpty(BufferedImage image){
+        Dimension[] dimensions = calculateImageBounds(image);
+        int minX = dimensions[0].width;
+        int minY = dimensions[0].height;
+        int maxX = dimensions[1].width;
+        int maxY = dimensions[1].height;
+        return minX + maxX == -1 && minY + maxY == -1;
     }
 
     /**
@@ -88,13 +98,16 @@ public class SpriteSheet {
      * @return the sprite as a BufferedImage
      */
     public BufferedImage getSprite(int row, int column){
+        if(row < 0 || column < 0){
+            throw new IllegalArgumentException("The row and the column cannot be bellow 0");
+        }
         BufferedImage sprite = SPRITESHEET.getSubimage(column * SPRITE_WIDTH,row * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT);
         Dimension[] dimensions = calculateImageBounds(sprite);
         int minX = dimensions[0].width;
         int minY = dimensions[0].height;
         int maxX = dimensions[1].width;
         int maxY = dimensions[1].height;
-        if(minX+maxX == 0){ // the cell is empty
+        if(imageIsEmpty(sprite)){
             return null;
         }
         if(this.spaceAdjusted){
@@ -130,34 +143,6 @@ public class SpriteSheet {
         dimensions[0] = new Dimension(minX, minY);
         dimensions[1] = new Dimension(maxX, maxY);
         return dimensions;
-    }
-
-    /**
-     * Draws all BufferedImages of an Arraylist to graphics
-     * @param graphics2D the graphics for which the Images are to be drawn to
-     * @param images the ArrayList of all the images that are to be drawn
-     * @param x the x position from which to start drawing
-     * @param y the y position from which to start drawing
-     * @param scale the scale for which to scale the images
-     * @param spaceBetween the space between the images that are drawn
-     * @param vertical if true the Images will be drawn vertically, if false horizontally
-     */
-    public static void drawImgList(Graphics2D graphics2D, ArrayList<BufferedImage> images, int x, int y, int scale, int spaceBetween, boolean vertical){
-        int xpos = x;
-        int ypos = y;
-        for(BufferedImage img : images){
-            if(img != null){
-                graphics2D.drawImage(img, xpos, ypos, img.getWidth() * scale, img.getHeight() * scale, null);
-            }
-            xpos += vertical ? 0 : spaceBetween;
-            ypos += vertical ? spaceBetween : 0;
-        }
-    }
-
-    public static void drawSprite(Graphics2D graphics2D, BufferedImage sprite, int x, int y, int scale){
-        int width = sprite.getWidth() * scale;
-        int height = sprite.getHeight() * scale;
-        graphics2D.drawImage(sprite, x,y, width, height, null);
     }
 
     public ArrayList<BufferedImage> getRow(int row) {
