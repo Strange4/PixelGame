@@ -18,6 +18,10 @@ public abstract class Animated {
         loadAnimations();
     }
 
+    public void changeDelayForAnimation(int delayBetweenFrames, int animationNumber){
+        animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
+    }
+
     private void loadAnimations(){
         if(this.spriteSheet.isSpritesByColumn()){
             for(int i=0;i<animations.length;i++){
@@ -27,7 +31,9 @@ public abstract class Animated {
             }
         }
     }
+
     public void updateAnimation(){
+    //TODO: set the current frame of all the other animations to 0 when changing animations
         animations[currentAnimation].update();
     }
     public void changeAnimation(int row){
