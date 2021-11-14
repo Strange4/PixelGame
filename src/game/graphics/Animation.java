@@ -32,4 +32,8 @@ public class Animation {
     public BufferedImage getCurrentFrame(){
         return this.animationFrames[currentFrame];
     }
+
+    public void resetAnimation(){
+        this.currentFrame = 0;
+    }
 }

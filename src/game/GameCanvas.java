@@ -18,9 +18,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private Thread thread;
     private boolean running;
     private MouseHandler mouse;
-    // private KeyHandler key;
     private Keyboard keyboard;
-    // TODO Delete it
     private MovementHandler moveHandler;
     private GameStateManager gsm;
     private BufferStrategy bs;

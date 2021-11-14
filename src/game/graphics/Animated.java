@@ -32,9 +32,13 @@ public abstract class Animated {
     public void updateAnimation(){
         animations[currentAnimation].update();
     }
-    //TODO: set the current frame of all the other animations to 0 when changing animations
-    public void changeAnimation(int row){
-        this.currentAnimation = row;
+    public void changeAnimation(int animationNumber){
+        for(int i=0;i<animations.length;i++){
+            if(i != animationNumber){
+                animations[i].resetAnimation();
+            }
+        }
+        this.currentAnimation = animationNumber;
     }
 
     public BufferedImage getCurrentFrame(){
