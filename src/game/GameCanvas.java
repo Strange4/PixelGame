@@ -2,8 +2,7 @@ package game;
 
 import game.keyboard.Keyboard;
 import game.keyboard.MovementHandler;
-import game.states.GameStateManager;
-import game.util.KeyHandler;
+import game.layers.GameLayerManager;
 import game.util.MouseHandler;
 import game.util.Vector2D;
 import java.awt.event.KeyEvent;
@@ -20,7 +19,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private MouseHandler mouse;
     private Keyboard keyboard;
     private MovementHandler moveHandler;
-    private GameStateManager gsm;
+    private GameLayerManager gsm;
     private BufferStrategy bs;
 
     public GameCanvas(int width, int height) {
@@ -49,7 +48,7 @@ public class GameCanvas extends Canvas implements Runnable {
         createBufferStrategy(3);
         mouse = new MouseHandler();
         //key = new KeyHandler();
-        gsm = new GameStateManager();
+        gsm = new GameLayerManager();
         bs = getBufferStrategy();
     }
 
@@ -135,12 +134,7 @@ public class GameCanvas extends Canvas implements Runnable {
         gsm.update();
     }
 
-    /**
-     * Gives the input data to the game state manager
-     * 
-     * @param mouse the mouse handler of the canvas
-     * @param key   the key handler of the canvas
-     */
+
     private void input() {
         //gsm.input(mouse, key);
         Vector2D v = this.moveHandler.getDirectional2DVector();
