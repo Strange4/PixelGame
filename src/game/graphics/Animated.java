@@ -1,7 +1,6 @@
 package game.graphics;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public abstract class Animated {
     protected Animation[] animations;
@@ -18,27 +17,28 @@ public abstract class Animated {
         loadAnimations();
     }
 
-    private void loadAnimations(){
+    public void changeDelayForAnimation(int delayBetweenFrames, int animationNumber){
+        animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
+    }
 
-        if(this.spriteSheet.isSpritesByColumn()){
-            for(int i=0;i<animations.length;i++){
-                BufferedImage[] frames = new BufferedImage[spriteSheet.getColumn(currentAnimation).size()];
-                frames = spriteSheet.getColumn(currentAnimation).toArray(frames);
-                animations[i] = new Animation(frames, 10);
-            }
-        }else{
-            for(int i=0;i<animations.length;i++){
-                BufferedImage[] frames = new BufferedImage[spriteSheet.getRow(currentAnimation).size()];
-                frames = spriteSheet.getRow(currentAnimation).toArray(frames);
-                animations[i] = new Animation(frames, 100);
-            }
+    private void loadAnimations(){
+        for(int i=0;i<animations.length;i++){
+            BufferedImage[] frames = new BufferedImage[spriteSheet.getAnimationFrames(i).size()];
+            frames = spriteSheet.getAnimationFrames(i).toArray(frames);
+            animations[i] = new Animation(frames, 10);
         }
     }
+
     public void updateAnimation(){
         animations[currentAnimation].update();
     }
-    public void changeAnimation(int row){
-        this.currentAnimation = row;
+    public void changeAnimation(int animationNumber){
+        for(int i=0;i<animations.length;i++){
+            if(i != animationNumber){
+                animations[i].resetAnimation();
+            }
+        }
+        this.currentAnimation = animationNumber;
     }
 
     public BufferedImage getCurrentFrame(){

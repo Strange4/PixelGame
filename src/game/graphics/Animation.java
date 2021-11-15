@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public class Animation {
     private final BufferedImage[] animationFrames;
-    private final int delay;
+    private int delay;
     private int timesPlayed = 0;
     private final int totalFrameCount;
     private int timesUpdated = 0;
@@ -14,6 +14,10 @@ public class Animation {
         this.animationFrames = animationFrames;
         this.delay = delayBetweenFrames;
         totalFrameCount = animationFrames.length;
+    }
+
+    public void setDelayBetweenFrames(int delay){
+        this.delay = delay;
     }
 
     public void update(){
@@ -27,5 +31,9 @@ public class Animation {
 
     public BufferedImage getCurrentFrame(){
         return this.animationFrames[currentFrame];
+    }
+
+    public void resetAnimation(){
+        this.currentFrame = 0;
     }
 }
