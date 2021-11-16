@@ -45,9 +45,6 @@ public class Vector2D {
 
     @Override
     public String toString() {
-        return "Vector2D{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "<" + x + ", " + y + ">";
     }
 }

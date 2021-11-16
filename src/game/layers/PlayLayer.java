@@ -29,13 +29,12 @@ public class PlayLayer extends GameLayer {
 
     @Override
     public void input(MouseHandler mouse, MovementHandler movementHandler) {
-        this.entity.move(movementHandler.getDirectional2DVector(), 2);
+        this.entity.move(movementHandler.getDirectional2DVector());
     }
 
     @Override
     public void render(Graphics2D graphics2D, int scale) {
         BufferedImage img = entity.getCurrentFrame();
         graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), img.getWidth() * scale, img.getHeight() * scale, null);
-//        graphics2D.fillRect();
     }
 }

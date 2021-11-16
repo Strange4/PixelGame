@@ -7,7 +7,7 @@ import game.util.Vector2D;
 public abstract class Entity extends Animated {
     protected final int WIDTH = this.spriteSheet.getSPRITE_WIDTH();
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
-    protected final int SPEED = 2;
+    protected double speed = 0.5;
     protected Vector2D position;
 
     public Entity(SpriteSheet spriteSheet, Vector2D position) {
@@ -15,9 +15,12 @@ public abstract class Entity extends Animated {
         this.position = position;
     }
 
-    public void move(Vector2D movement, int speed){
-//        this.position.addX();
+    public void move(Vector2D movement){
+        this.position.addX(movement.getX() * this.speed);
+        this.position.addY(movement.getY() * this.speed);
     }
+
+    public void setSPEED(double speed){this.speed = speed;}
 
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
