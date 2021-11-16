@@ -9,6 +9,8 @@ public abstract class Entity extends Animated {
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
     protected double speed = 0.5;
     protected Vector2D position;
+    protected Vector2D lastMovement;
+
 
     public Entity(SpriteSheet spriteSheet, Vector2D position) {
         super(spriteSheet);
@@ -16,6 +18,8 @@ public abstract class Entity extends Animated {
     }
 
     public void move(Vector2D movement){
+        this.lastMovement.setX(movement.getX());
+        this.lastMovement.setY(movement.getY());
         this.position.addX(movement.getX() * this.speed);
         this.position.addY(movement.getY() * this.speed);
     }
