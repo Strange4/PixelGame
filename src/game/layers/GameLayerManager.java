@@ -1,5 +1,6 @@
 package game.layers;
 
+import game.keyboard.MovementHandler;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
 
@@ -37,9 +38,9 @@ public class GameLayerManager {
         }
     }
 
-    public void input(MouseHandler mouse, KeyHandler key){
+    public void input(MouseHandler mouse, MovementHandler mHandler){
         for (GameLayer state : states) {
-            state.input(mouse, key);
+            state.input(mouse, mHandler);
         }
     }
 

@@ -165,4 +165,7 @@ public class SpriteSheet {
     public int getSPRITE_ROW_COUNT() {
         return SPRITE_ROW_COUNT;
     }
+
+    public int getSPRITE_HEIGHT(){ return this.SPRITE_HEIGHT;}
+    public int getSPRITE_WIDTH(){ return this.SPRITE_WIDTH;}
 }

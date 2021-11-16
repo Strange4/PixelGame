@@ -33,6 +33,16 @@ public class Vector2D {
         this.y += y;
     }
 
+    public void addVector(Vector2D movement){
+        this.x += movement.getX();
+        this.y += movement.getY();
+    }
+
+    public void multiplyScalar(double scalar) {
+        this.x = this.x * scalar;
+        this.y = this.y * scalar;
+    }
+
     @Override
     public String toString() {
         return "Vector2D{" +

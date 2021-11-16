@@ -1,5 +1,6 @@
 package game.layers;
 
+import game.keyboard.MovementHandler;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
 
@@ -12,7 +13,7 @@ public abstract class GameLayer {
     }
 
     abstract void update();
-    abstract void input(MouseHandler mouse, KeyHandler key);
+    abstract void input(MouseHandler mouse, MovementHandler mHandler);
     abstract void render(Graphics2D graphics2D, int scale);
 
 }
