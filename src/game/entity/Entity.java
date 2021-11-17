@@ -1,5 +1,6 @@
 package game.entity;
 
+import game.entity.esm.EntityState;
 import game.graphics.Animated;
 import game.graphics.SpriteSheet;
 import game.util.Vector2D;
@@ -8,6 +9,7 @@ public abstract class Entity extends Animated {
     protected final int WIDTH = this.spriteSheet.getSPRITE_WIDTH();
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
     protected double speed = 0.5;
+    protected EntityState state;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);
 
@@ -23,6 +25,9 @@ public abstract class Entity extends Animated {
         this.position.addX(movement.getX() * this.speed);
         this.position.addY(movement.getY() * this.speed);
     }
+
+    public EntityState getState(){return this.state;}
+    public void setState(EntityState state){this.state = state;}
 
     public void setSPEED(double speed){this.speed = speed;}
     public double getSpeed(){return this.speed;}

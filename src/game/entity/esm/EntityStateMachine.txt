@@ -49,8 +49,8 @@ IMPORTANT:
 
 Implementation:
     Making a state interface with methods
-        - handleInput(player, input)
-        - update(player)
+        - handleInput(entity) -- only on the player
+        - update(entity) -- on every entity, based on the state
 
     Making a superstate class for the categories of states. If the substate
     doesn't handle it, it's going to roll up the chain of superstates.
@@ -68,3 +68,6 @@ Implementation:
     We will also have a state stack for holding the previous and current state,
     so we can transition between each. When we push a state, its animation starts
     and the state gets popped from the stack when its animation is done.
+
+    Finally, we need to check the state of each entity on every tick and update it
+    accordingly.
