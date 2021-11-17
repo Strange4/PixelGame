@@ -1,4 +1,4 @@
-package game.entity;
+package game.entity.esm;
 
 public enum EntityState {
     STATE_WALKING,

@@ -52,7 +52,8 @@ Implementation:
         - handleInput(player, input)
         - update(player)
 
-    Making a superstate class for the categories of states.
+    Making a superstate class for the categories of states. If the substate
+    doesn't handle it, it's going to roll up the chain of superstates.
 
     Making a class for each state, each state will check if it's associate
     input is triggered, and it will execute logic for that state.
