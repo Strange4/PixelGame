@@ -37,9 +37,6 @@ public class MovementHandler implements KeyListener {
                 // System.out.println("LEFT");
                 this.directional2DVector.addX(-1);
                 break;
-            case KeyEvent.VK_SPACE:
-                 System.out.println("DASH");
-                break;
             }
         }
         return this.directional2DVector;
