@@ -13,7 +13,7 @@ public class Keyboard extends ArrayList<Key> {
     }
 
     public void toggleKeyState(Key key) {
-        key.toggleIsPressed();
+        key.setIsPressed(!key.getIsPressed());
     }
 
     public Key[] getPressedKeys() {

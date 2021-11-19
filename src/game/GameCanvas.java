@@ -17,8 +17,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private Thread thread;
     private boolean running;
     private MouseHandler mouse;
-    private Keyboard keyboard;
-    private MovementHandler moveHandler;
+    private final MovementHandler moveHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
 
@@ -29,7 +28,7 @@ public class GameCanvas extends Canvas implements Runnable {
         setFocusable(true);
         setVisible(true);
         // Keyboard Events Handler
-        this.keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D);
+        Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE);
         this.moveHandler = new MovementHandler(keyboard);
         addKeyListener(this.moveHandler);
     }
@@ -136,11 +135,12 @@ public class GameCanvas extends Canvas implements Runnable {
 
 
     private void input() {
-        //gsm.input(mouse, key);
+        gsm.input(mouse, moveHandler);
         Vector2D v = this.moveHandler.getDirectional2DVector();
-        if (v.getX() != 0 || v.getY() != 0) {
-            System.out.println(v);
-        }
+
+//        if (v.getX() != 0 || v.getY() != 0) {
+//            System.out.println(v);
+//        }
     }
 
     /**
@@ -149,7 +149,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private void render() {
         Graphics2D graphics = (Graphics2D) bs.getDrawGraphics();
         graphics.fillRect(0, 0, width, height);
-        gsm.render(graphics, 5);
+        gsm.render(graphics, 1);
         graphics.dispose();
         bs.show();
     }
