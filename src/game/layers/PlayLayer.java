@@ -3,6 +3,7 @@ package game.layers;
 import game.entity.Entity;
 import game.entity.Player;
 import game.graphics.SpriteSheet;
+import game.graphics.tiles.TileManager;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
 
@@ -12,9 +13,11 @@ import java.awt.image.BufferedImage;
 public class PlayLayer extends GameLayer {
     private SpriteSheet sprite;
     private Entity entity;
+    private TileManager tileManager;
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
+        tileManager = new TileManager("try#1.xml");
         sprite = new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false);
         entity = new Player(sprite);
 //        entity.changeAnimation(6);
