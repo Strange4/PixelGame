@@ -1,6 +1,7 @@
 package game.entity;
 
 import game.entity.esm.EntityState;
+import game.entity.esm.EntityStateManager;
 import game.graphics.Animated;
 import game.graphics.SpriteSheet;
 import game.util.Vector2D;
@@ -12,6 +13,7 @@ public abstract class Entity extends Animated {
     protected EntityState state;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);
+    protected EntityStateManager esm;
 
 
     public Entity(SpriteSheet spriteSheet, Vector2D position) {
@@ -34,4 +36,8 @@ public abstract class Entity extends Animated {
 
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
+
+    public void update(){
+        updateAnimation();
+    }
 }

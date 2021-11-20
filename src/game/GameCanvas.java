@@ -1,5 +1,6 @@
 package game;
 
+import game.keyboard.KeyHandler;
 import game.keyboard.Keyboard;
 import game.keyboard.MovementHandler;
 import game.layers.GameLayerManager;
@@ -17,7 +18,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private Thread thread;
     private boolean running;
     private MouseHandler mouse;
-    private final MovementHandler moveHandler;
+    private final KeyHandler keyHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
 
@@ -28,9 +29,9 @@ public class GameCanvas extends Canvas implements Runnable {
         setFocusable(true);
         setVisible(true);
         // Keyboard Events Handler
-        Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE);
-        this.moveHandler = new MovementHandler(keyboard);
-        addKeyListener(this.moveHandler);
+        Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q);
+        this.keyHandler = new KeyHandler(keyboard);
+        addKeyListener(this.keyHandler);
     }
 
     @Override
@@ -135,12 +136,7 @@ public class GameCanvas extends Canvas implements Runnable {
 
 
     private void input() {
-        gsm.input(mouse, moveHandler);
-        Vector2D v = this.moveHandler.getDirectional2DVector();
-
-//        if (v.getX() != 0 || v.getY() != 0) {
-//            System.out.println(v);
-//        }
+        gsm.input(mouse, keyHandler);
     }
 
     /**

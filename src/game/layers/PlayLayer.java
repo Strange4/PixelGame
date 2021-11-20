@@ -3,8 +3,8 @@ package game.layers;
 import game.entity.Entity;
 import game.entity.Player;
 import game.graphics.SpriteSheet;
+import game.keyboard.KeyHandler;
 import game.keyboard.MovementHandler;
-import game.util.KeyHandler;
 import game.util.MouseHandler;
 import game.util.Vector2D;
 
@@ -28,8 +28,11 @@ public class PlayLayer extends GameLayer {
     }
 
     @Override
-    public void input(MouseHandler mouse, MovementHandler movementHandler) {
-        this.entity.move(movementHandler.getDirectional2DVector());
+    public void input(MouseHandler mouse, KeyHandler keyHandler) {
+        keyHandler.handleKey();
+//        Vector2D v = movementHandler.getDirectional2DVector();
+//        System.out.println(movementHandler.getState());
+//        this.entity.move(v);
     }
 
     @Override
