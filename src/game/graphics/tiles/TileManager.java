@@ -56,7 +56,7 @@ public class TileManager {
             tileHeight = Integer.parseInt(element.getAttribute("tileheight"));
             tileCount = Integer.parseInt(element.getAttribute("tilecount"));
             tileColumns = Integer.parseInt(element.getAttribute("columns"));
-            spriteSheet = new SpriteSheet(imagePath, tileWidth, tileHeight, false, false);
+            spriteSheet = new SpriteSheet(imagePath, tileWidth, tileHeight);
 
             list = doc.getElementsByTagName("layer");
             layers = list.getLength();

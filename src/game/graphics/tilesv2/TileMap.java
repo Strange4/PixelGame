@@ -9,33 +9,35 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class TileReader {
+public class TileMap {
     private Document xmlMap;
-    private int tileWidth;
-    private int tileHeight;
-    private int mapWidth;
-    private int mapHeight;
+    private int tileWidth; // in pixels
+    private int tileHeight; // in pixels
+    private int mapWidth; // in tiles
+    private int mapHeight; // in tiles
     private ArrayList<TileSet> allTileSets;
-    private int[][] tileCoordinates;
+    private BufferedImage levelImage;
+    private String currentFolder;
 
-    //TODO: render to a bufferedimage in this file using the tilesets and the coordinates
-
-    public TileReader(String path){
+    public TileMap(String path){
         loadXMLFile(path);
         loadTileSets();
-        loadLayers();
+        buildLevelImage();
     }
 
     private void loadXMLFile(String path){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            this.xmlMap = builder.parse(new File(getClass().getClassLoader().getResource(path).toURI()));
+            File file = new File(getClass().getClassLoader().getResource(path).toURI());
+            this.currentFolder = file.getParentFile().getName();
+            this.xmlMap = builder.parse(file);
         } catch (ParserConfigurationException | URISyntaxException | IOException | SAXException e) {
             e.printStackTrace();
         }
@@ -44,7 +46,6 @@ public class TileReader {
         this.tileHeight = Integer.parseInt(mapInfo.getAttribute("tileheight"));
         this.mapHeight = Integer.parseInt(mapInfo.getAttribute("height"));
         this.mapWidth = Integer.parseInt(mapInfo.getAttribute("width"));
-        this.tileCoordinates = new int[mapWidth][mapHeight];
     }
 
     private void loadTileSets(){
@@ -59,35 +60,68 @@ public class TileReader {
             int nbColumns = Integer.parseInt(tileset.getAttribute("columns"));
 
             // getting the image
-            Element image = (Element) tileset.getElementsByTagName("image");
+            Element image = (Element) tileset.getElementsByTagName("image").item(0);
             int imageWidth = Integer.parseInt(image.getAttribute("width"));
             int imageHeight = Integer.parseInt(image.getAttribute("height"));
             String imageSource = image.getAttribute("source");
-            allTileSets.add(new TileSet(firstGid, name, tileWidth, tileHeight, nbColumns, imageSource, imageWidth, imageHeight));
+            allTileSets.add(new TileSet(firstGid, name, tileWidth, tileHeight, nbColumns, this.currentFolder + "/" +imageSource, imageWidth, imageHeight));
         }
     }
 
-    // TODO: do this
-    private void loadLayers(){
+    private void buildLevelImage(){
+        this.levelImage = new BufferedImage(tileWidth * mapWidth, tileHeight * mapHeight, BufferedImage.TYPE_INT_ARGB);
         NodeList layers = this.xmlMap.getElementsByTagName("layer");
         for(int i=0;i<layers.getLength();i++){
+            // getting tile tileID's
             int[] tileIds = new int[this.mapWidth * this.mapHeight];
             String data = ((Element)layers.item(i)).getElementsByTagName("data").item(0).getTextContent();
             String[] tileNumbers = data.split(",");
             for(int e=0;e<tileNumbers.length;e++){
-                tileIds[e] = Integer.parseInt(tileNumbers[e]);
+                int gid = Integer.parseInt(tileNumbers[e].replaceAll("\\s+", ""));
+                if(gid > 0){
+                    tileIds[e] = gid;
+                }
             }
+
+            // setting the tileId's to a coordinate on the layer
+            int[][] tileCoordinates = new int[this.mapWidth][this.mapHeight];
             for(int tileX=0;tileX<this.mapWidth;tileX++){
                 for(int tileY=0;tileY<this.mapHeight;tileY++){
                     tileCoordinates[tileX][tileY] = tileIds[tileX + (tileY * mapWidth)];
                 }
             }
+            // drawing the tileimage into the level image
+            for (int tileX = 0; tileX < this.mapWidth; tileX++) {
+                for (int tileY = 0; tileY < this.mapHeight; tileY++) {
+                    int tid = tileCoordinates[tileX][tileY];
+                    if(tid!=0){
+                        // find the current tileset
+                        TileSet currentTileSet = findTileSet(tid);
+
+                        // drawing the tile
+                        int posX = tileX * this.tileWidth;
+                        int posY = tileY * this.tileHeight;
+                        BufferedImage tileImage = currentTileSet.getTileImage(tid);
+
+                        this.levelImage.getGraphics().drawImage(tileImage, posX, posX, this.tileWidth, this.tileHeight, null);
+                    }
+                }
+            }
+
         }
     }
 
-    //TODO: only render the tiles that are non-zero
-    public void render(Graphics2D graphics2D){
-
+    private TileSet findTileSet(int tileId){
+        for (TileSet tileset : allTileSets) {
+            if (tileId >= tileset.getFirstGid() && tileId < tileset.getLastGid()) {
+                return tileset;
+            }
+        }
+        throw new IllegalArgumentException("the tile with tid: "+tileId +" was not found");
     }
 
+    //TODO: only render the tiles that are non-zero
+    public void render(Graphics2D graphics2D) {
+
+    }
 }

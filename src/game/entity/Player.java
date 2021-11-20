@@ -1,9 +1,9 @@
 package game.entity;
 
-import game.graphics.SpriteSheet;
+import game.graphics.AnimationSpriteSheet;
 
 public class Player extends Entity {
-    public Player(SpriteSheet spriteSheet) {
+    public Player(AnimationSpriteSheet spriteSheet) {
         super(spriteSheet);
     }
 }

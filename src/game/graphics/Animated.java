@@ -4,10 +4,10 @@ import java.awt.image.BufferedImage;
 
 public abstract class Animated {
     protected Animation[] animations;
-    protected final SpriteSheet spriteSheet;
+    protected final AnimationSpriteSheet spriteSheet;
     protected int currentAnimation = 0;
 
-    public Animated(SpriteSheet spriteSheet){
+    public Animated(AnimationSpriteSheet spriteSheet){
         this.spriteSheet = spriteSheet;
         if(spriteSheet.isSpritesByColumn()){
             this.animations = new Animation[spriteSheet.getSPRITE_COL_COUNT()];
@@ -17,15 +17,13 @@ public abstract class Animated {
         loadAnimations();
     }
 
-    public void changeDelayForAnimation(int delayBetweenFrames, int animationNumber){
+    public void changeAnimationDelay(int delayBetweenFrames, int animationNumber){
         animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
     }
 
     private void loadAnimations(){
         for(int i=0;i<animations.length;i++){
-            BufferedImage[] frames = new BufferedImage[spriteSheet.getAnimationFrames(i).size()];
-            frames = spriteSheet.getAnimationFrames(i).toArray(frames);
-            animations[i] = new Animation(frames, 10);
+            animations[i] = new Animation(this.spriteSheet.getAnimationFrames(i), 10);
         }
     }
 
