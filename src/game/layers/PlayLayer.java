@@ -34,7 +34,7 @@ public class PlayLayer extends GameLayer {
     @Override
     public void render(Graphics2D graphics2D, int scale) {
         BufferedImage img = entity.getCurrentFrame();
-        tl.render(graphics2D, 0,0, 800, 800, 300);
+        tl.render(graphics2D, 400,225, 900, 1000, 100, 2);
         graphics2D.drawImage(img, 50, 50, img.getWidth() * scale, img.getHeight() * scale, null);
     }
 }

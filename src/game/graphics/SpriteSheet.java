@@ -1,10 +1,8 @@
 package game.graphics;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SpriteSheet {
     protected final BufferedImage SPRITESHEET;
@@ -15,7 +13,6 @@ public class SpriteSheet {
     protected int SPRITE_ROW_COUNT;
 
     public SpriteSheet(String file, int spriteWidth, int spriteHeight){
-        System.out.println(file);
         this.SPRITE_WIDTH = spriteWidth;
         this.SPRITE_HEIGHT = spriteHeight;
         SPRITESHEET = loadSpriteSheet(file);

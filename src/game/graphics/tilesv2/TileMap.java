@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TileMap {
@@ -35,7 +36,11 @@ public class TileMap {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            File file = new File(getClass().getClassLoader().getResource(path).toURI());
+            URL url = Thread.currentThread().getContextClassLoader().getResource(path);
+            if(url == null){
+                throw new NullPointerException("the path given for the tilemap cannot be found");
+            }
+            File file = new File(url.toURI());
             this.currentFolder = file.getParentFile().getName();
             this.xmlMap = builder.parse(file);
         } catch (ParserConfigurationException | URISyntaxException | IOException | SAXException e) {
@@ -120,8 +125,23 @@ public class TileMap {
         throw new IllegalArgumentException("the tile with tid: "+tileId +" was not found");
     }
 
-    //TODO: only render the tiles that are non-zero
-    public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistance) {
-        graphics2D.drawImage(this.levelImage.getSubimage(mapPosX-renderDistance, mapPosY-renderDistance, renderDistance*2, renderDistance*2),posX, posY, renderDistance*2, renderDistance*2, null);
+    public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistance, int scale) {
+        if(mapPosX - renderDistance > this.mapWidth * this.tileWidth){
+            throw new IllegalArgumentException("the render distance: "+renderDistance+", at mapPosX: "+ mapPosX+", is too small to see the map");
+        }
+        if(mapPosY - renderDistance > this.mapHeight * this.tileHeight){
+            throw new IllegalArgumentException("the render distance: "+renderDistance+", at mapPosY: "+ mapPosY+", is too small to see the map");
+        }
+
+
+
+        // if the renderDistance is outside the map, render until the end of it
+        int renderFromX = Math.max(mapPosX - (renderDistance), 0);
+        int renderFromY = Math.max(mapPosY - renderDistance, 0);
+        int renderWidth = Math.min(renderDistance * 2, (this.mapWidth * this.tileWidth) - renderFromX);
+        int renderHeight = Math.min(renderDistance * 2, (this.mapHeight * this.tileHeight) - renderFromY);
+        graphics2D.drawImage(this.levelImage.getSubimage(renderFromX, renderFromY, renderWidth, renderHeight),posX-renderDistance, posY-renderDistance, renderWidth, renderHeight, null);
+        graphics2D.setColor(Color.BLUE);
+        graphics2D.drawRect(posX-renderDistance, posY - renderDistance, renderDistance * 2, renderDistance *2);
     }
 }
