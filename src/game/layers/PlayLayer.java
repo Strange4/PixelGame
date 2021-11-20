@@ -18,7 +18,7 @@ public class PlayLayer extends GameLayer {
         super(glm);
         AnimationSpriteSheet sprite = new AnimationSpriteSheet("Bot Wheel/ken.png", 85, 85, false, false);
         entity = new Player(sprite);
-        tl = new TileMap("Maps/try#2.xml");
+        tl = new TileMap("Maps/try#2.tmx");
     }
 
     @Override

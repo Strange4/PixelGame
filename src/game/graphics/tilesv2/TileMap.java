@@ -32,6 +32,10 @@ public class TileMap {
         buildLevelImage();
     }
 
+    private void loadObjects(){
+
+    }
+
     private void loadXMLFile(String path){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newDefaultInstance();
         try {
