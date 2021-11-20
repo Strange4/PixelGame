@@ -103,7 +103,7 @@ public class TileMap {
                         int posY = tileY * this.tileHeight;
                         BufferedImage tileImage = currentTileSet.getTileImage(tid);
 
-                        this.levelImage.getGraphics().drawImage(tileImage, posX, posX, this.tileWidth, this.tileHeight, null);
+                        this.levelImage.getGraphics().drawImage(tileImage, posX, posY, this.tileWidth, this.tileHeight, null);
                     }
                 }
             }
@@ -121,7 +121,7 @@ public class TileMap {
     }
 
     //TODO: only render the tiles that are non-zero
-    public void render(Graphics2D graphics2D) {
-
+    public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistance) {
+        graphics2D.drawImage(this.levelImage.getSubimage(mapPosX-renderDistance, mapPosY-renderDistance, renderDistance*2, renderDistance*2),posX, posY, renderDistance*2, renderDistance*2, null);
     }
 }
