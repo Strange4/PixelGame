@@ -1,5 +1,6 @@
 package game;
 
+import game.entity.EntityManager;
 import game.keyboard.KeyHandler;
 import game.keyboard.Keyboard;
 import game.keyboard.MovementHandler;
@@ -21,6 +22,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private final KeyHandler keyHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
+//    private EntityManager em;
 
     public GameCanvas(int width, int height) {
         this.width = width;
@@ -30,8 +32,10 @@ public class GameCanvas extends Canvas implements Runnable {
         setVisible(true);
         // Keyboard Events Handler
         Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q);
-        this.keyHandler = new KeyHandler(keyboard);
+        this.keyHandler = KeyHandler.getInstance();
+        this.keyHandler.init(keyboard);
         addKeyListener(this.keyHandler);
+//        this.em = new EntityManager();
     }
 
     @Override
@@ -78,8 +82,8 @@ public class GameCanvas extends Canvas implements Runnable {
             // updates only when the allowed time before update has passed and the min
             // number of updates are done
             while ((now - lastUpdateTime) > MIN_TIME_BEFORE_UPDATE && (updateCount < MIN_UPDATES_BEFORE_RENDER)) {
-                update();
                 input();
+                update();
                 //input(mouse, key);
                 lastUpdateTime += MIN_TIME_BEFORE_UPDATE;
                 updateCount++;

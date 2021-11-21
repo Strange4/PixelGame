@@ -1,6 +1,7 @@
 package game.layers;
 
 import game.entity.Entity;
+import game.entity.EntityManager;
 import game.entity.Player;
 import game.graphics.SpriteSheet;
 import game.keyboard.KeyHandler;
@@ -14,22 +15,26 @@ import java.awt.image.BufferedImage;
 public class PlayLayer extends GameLayer {
     private SpriteSheet sprite;
     private Entity entity;
+    private EntityManager em;
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-        sprite = new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false);
-        entity = new Player(sprite, new Vector2D(50, 50));
+//        sprite = ;
+//        entity = ;
+        this.em = new EntityManager();
+        this.em.addEntity(new Player(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(50, 50), 6));
 //        entity.changeAnimation(6);
     }
 
     @Override
     public void update() {
-        entity.updateAnimation();
+        this.em.update();
+//        entity.updateAnimation();
     }
 
     @Override
     public void input(MouseHandler mouse, KeyHandler keyHandler) {
-        keyHandler.handleKey();
+//        keyHandler.handleKey();
 //        Vector2D v = movementHandler.getDirectional2DVector();
 //        System.out.println(movementHandler.getState());
 //        this.entity.move(v);
@@ -37,7 +42,8 @@ public class PlayLayer extends GameLayer {
 
     @Override
     public void render(Graphics2D graphics2D, int scale) {
-        BufferedImage img = entity.getCurrentFrame();
-        graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), img.getWidth() * scale, img.getHeight() * scale, null);
+        this.em.render(graphics2D, scale);
+//        BufferedImage img = entity.getCurrentFrame();
+//        graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), img.getWidth() * scale, img.getHeight() * scale, null);
     }
 }

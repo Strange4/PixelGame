@@ -16,9 +16,11 @@ public abstract class Entity extends Animated {
     protected EntityStateManager esm;
 
 
-    public Entity(SpriteSheet spriteSheet, Vector2D position) {
+    public Entity(SpriteSheet spriteSheet, Vector2D position, int maxFrames) {
         super(spriteSheet);
         this.position = position;
+        this.esm = new EntityStateManager(this);
+        super.changeAnimation(maxFrames);
     }
 
     public void move(Vector2D movement){
@@ -38,6 +40,6 @@ public abstract class Entity extends Animated {
     public double getY(){ return this.position.getY(); }
 
     public void update(){
-        updateAnimation();
+        this.esm.update(this);
     }
 }
