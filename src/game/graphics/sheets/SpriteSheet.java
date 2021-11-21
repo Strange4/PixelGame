@@ -66,4 +66,12 @@ public class SpriteSheet {
     public int getSPRITE_ROW_COUNT() {
         return SPRITE_ROW_COUNT;
     }
+
+    public int getSPRITE_WIDTH() {
+        return SPRITE_WIDTH;
+    }
+
+    public int getSPRITE_HEIGHT() {
+        return SPRITE_HEIGHT;
+    }
 }
