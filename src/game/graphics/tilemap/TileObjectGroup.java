@@ -1,4 +1,4 @@
-package game.graphics.tilesv2;
+package game.graphics.tilemap;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ public class TileObjectGroup {
 
     public TileObjectGroup(String name){
         this.name = name;
+        this.objects = new ArrayList<>();
     }
 
     public void addObject(TileMapObject object){

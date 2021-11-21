@@ -1,4 +1,4 @@
-package game.graphics.tilesv2;
+package game.graphics.tilemap;
 
 public class TileMapObject {
     private final double posX;

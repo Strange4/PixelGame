@@ -2,13 +2,12 @@ package game.layers;
 
 import game.entity.Entity;
 import game.entity.Player;
-import game.graphics.AnimationSpriteSheet;
-import game.graphics.tilesv2.TileMap;
+import game.graphics.sheets.AnimationSpriteSheet;
+import game.graphics.tilemap.TileMap;
 import game.util.KeyHandler;
 import game.util.MouseHandler;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class PlayLayer extends GameLayer {
     private Entity entity;

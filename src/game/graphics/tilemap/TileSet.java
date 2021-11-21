@@ -1,6 +1,6 @@
-package game.graphics.tilesv2;
+package game.graphics.tilemap;
 
-import game.graphics.SpriteSheet;
+import game.graphics.sheets.SpriteSheet;
 
 import java.awt.image.BufferedImage;
 

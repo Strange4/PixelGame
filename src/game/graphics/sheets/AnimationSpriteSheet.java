@@ -1,10 +1,10 @@
-package game.graphics;
+package game.graphics.sheets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class AnimationSpriteSheet extends SpriteSheet{
+public class AnimationSpriteSheet extends SpriteSheet {
 
     private ArrayList<ArrayList<BufferedImage>> animationFrames;
     private final boolean spaceAdjusted;

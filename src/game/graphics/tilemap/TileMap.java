@@ -1,4 +1,4 @@
-package game.graphics.tilesv2;
+package game.graphics.tilemap;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,24 +25,27 @@ public class TileMap {
     private ArrayList<TileSet> allTileSets;
     private BufferedImage levelImage;
     private String currentFolder;
-//    private
+    private ArrayList<TileObjectGroup> objectGroups;
 
     public TileMap(String path){
         loadXMLFile(path);
         loadTileSets();
+        loadObjects();
         buildLevelImage();
     }
 
     private void loadObjects(){
+        this.objectGroups = new ArrayList<>();
         NodeList objectGroups = this.xmlMap.getElementsByTagName("objectgroup");
         for (int group = 0; group < objectGroups.getLength(); group++) {
+            TileObjectGroup tog = new TileObjectGroup(((Element)objectGroups.item(group)).getAttribute("name"));
             NodeList objects = ((Element) objectGroups.item(group)).getElementsByTagName("object");
             for (int obj = 0; obj < objects.getLength(); obj++) {
                 Element object = (Element) objects.item(obj);
-
-
+                TileMapObject tmo = new TileMapObject(Double.parseDouble(object.getAttribute("x")), Double.parseDouble(object.getAttribute("y")), Double.parseDouble(object.getAttribute("width")), Double.parseDouble(object.getAttribute("height")));
+                tog.addObject(tmo);
             }
-
+            this.objectGroups.add(tog);
         }
     }
 
@@ -143,11 +146,9 @@ public class TileMap {
         if(mapPosX - renderDistanceX > this.mapWidth * this.tileWidth){
             throw new IllegalArgumentException("the render distance x: "+renderDistanceX+", at mapPosX: "+ mapPosX+", is too small to see the map");
         }
-        if(mapPosY - renderDistanceY > this.mapHeight * this.tileHeight){
-            throw new IllegalArgumentException("the render distance y: "+renderDistanceY+", at mapPosY: "+ mapPosY+", is too small to see the map");
+        if(mapPosY - renderDistanceY > this.mapHeight * this.tileHeight) {
+            throw new IllegalArgumentException("the render distance y: " + renderDistanceY + ", at mapPosY: " + mapPosY + ", is too small to see the map");
         }
-
-
 
         // if the renderDistance is outside the map, render until the end of it
         int renderFromX = Math.max(mapPosX - renderDistanceX, 0);
