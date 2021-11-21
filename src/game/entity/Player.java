@@ -1,11 +1,11 @@
 package game.entity;
 
-import game.graphics.SpriteSheet;
+import game.graphics.sheets.AnimationSpriteSheet;
 import game.util.Vector2D;
 
 public class Player extends Entity {
 
-    public Player(SpriteSheet spriteSheet, Vector2D position) {
+    public Player(AnimationSpriteSheet spriteSheet, Vector2D position) {
         super(spriteSheet, position);
     }
 }

@@ -2,8 +2,6 @@ package game.keyboard;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Vector;
-
 import game.util.Vector2D;
 
 public class MovementHandler implements KeyListener {

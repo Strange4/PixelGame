@@ -1,18 +1,17 @@
 package game.entity;
 
-import game.graphics.Animated;
-import game.graphics.SpriteSheet;
+import game.graphics.animation.Animated;
+import game.graphics.sheets.AnimationSpriteSheet;
 import game.util.Vector2D;
 
 public abstract class Entity extends Animated {
     protected final int WIDTH = this.spriteSheet.getSPRITE_WIDTH();
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
-    protected double speed = 0.5;
+    protected double speed = 1.5;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);
 
-
-    public Entity(SpriteSheet spriteSheet, Vector2D position) {
+    public Entity(AnimationSpriteSheet spriteSheet, Vector2D position) {
         super(spriteSheet);
         this.position = position;
     }

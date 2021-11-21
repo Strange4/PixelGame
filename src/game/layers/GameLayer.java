@@ -1,7 +1,6 @@
 package game.layers;
 
 import game.keyboard.MovementHandler;
-import game.util.KeyHandler;
 import game.util.MouseHandler;
 
 import java.awt.*;

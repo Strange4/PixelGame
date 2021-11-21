@@ -89,7 +89,6 @@ public class GameCanvas extends Canvas implements Runnable {
             }
             input();
             render();
-            draw();
 
             lastRenderTime = now;
             frameCount++;
@@ -148,12 +147,8 @@ public class GameCanvas extends Canvas implements Runnable {
      */
     private void render() {
         Graphics2D graphics = (Graphics2D) bs.getDrawGraphics();
-        graphics.fillRect(0, 0, width, height);
         gsm.render(graphics, 1);
         graphics.dispose();
         bs.show();
-    }
-
-    private void draw() {
     }
 }
