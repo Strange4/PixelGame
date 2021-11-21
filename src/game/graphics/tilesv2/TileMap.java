@@ -25,6 +25,7 @@ public class TileMap {
     private ArrayList<TileSet> allTileSets;
     private BufferedImage levelImage;
     private String currentFolder;
+//    private
 
     public TileMap(String path){
         loadXMLFile(path);
@@ -33,7 +34,16 @@ public class TileMap {
     }
 
     private void loadObjects(){
+        NodeList objectGroups = this.xmlMap.getElementsByTagName("objectgroup");
+        for (int group = 0; group < objectGroups.getLength(); group++) {
+            NodeList objects = ((Element) objectGroups.item(group)).getElementsByTagName("object");
+            for (int obj = 0; obj < objects.getLength(); obj++) {
+                Element object = (Element) objects.item(obj);
 
+
+            }
+
+        }
     }
 
     private void loadXMLFile(String path){
@@ -129,23 +139,23 @@ public class TileMap {
         throw new IllegalArgumentException("the tile with tid: "+tileId +" was not found");
     }
 
-    public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistance, int scale) {
-        if(mapPosX - renderDistance > this.mapWidth * this.tileWidth){
-            throw new IllegalArgumentException("the render distance: "+renderDistance+", at mapPosX: "+ mapPosX+", is too small to see the map");
+    public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistanceX, int renderDistanceY) {
+        if(mapPosX - renderDistanceX > this.mapWidth * this.tileWidth){
+            throw new IllegalArgumentException("the render distance x: "+renderDistanceX+", at mapPosX: "+ mapPosX+", is too small to see the map");
         }
-        if(mapPosY - renderDistance > this.mapHeight * this.tileHeight){
-            throw new IllegalArgumentException("the render distance: "+renderDistance+", at mapPosY: "+ mapPosY+", is too small to see the map");
+        if(mapPosY - renderDistanceY > this.mapHeight * this.tileHeight){
+            throw new IllegalArgumentException("the render distance y: "+renderDistanceY+", at mapPosY: "+ mapPosY+", is too small to see the map");
         }
 
 
 
         // if the renderDistance is outside the map, render until the end of it
-        int renderFromX = Math.max(mapPosX - (renderDistance), 0);
-        int renderFromY = Math.max(mapPosY - renderDistance, 0);
-        int renderWidth = Math.min(renderDistance * 2, (this.mapWidth * this.tileWidth) - renderFromX);
-        int renderHeight = Math.min(renderDistance * 2, (this.mapHeight * this.tileHeight) - renderFromY);
-        graphics2D.drawImage(this.levelImage.getSubimage(renderFromX, renderFromY, renderWidth, renderHeight),posX-renderDistance, posY-renderDistance, renderWidth, renderHeight, null);
+        int renderFromX = Math.max(mapPosX - renderDistanceX, 0);
+        int renderFromY = Math.max(mapPosY - renderDistanceY, 0);
+        int renderWidth = Math.min(renderDistanceX * 2, (this.mapWidth * this.tileWidth) - renderFromX);
+        int renderHeight = Math.min(renderDistanceY * 2, (this.mapHeight * this.tileHeight) - renderFromY);
+        graphics2D.drawImage(this.levelImage.getSubimage(renderFromX, renderFromY, renderWidth, renderHeight),posX-renderDistanceX, posY-renderDistanceY, renderWidth, renderHeight, null);
         graphics2D.setColor(Color.BLUE);
-        graphics2D.drawRect(posX-renderDistance, posY - renderDistance, renderDistance * 2, renderDistance *2);
+        graphics2D.drawRect(posX-renderDistanceX, posY - renderDistanceY, renderDistanceX * 2, renderDistanceY *2);
     }
 }
