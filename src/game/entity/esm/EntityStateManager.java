@@ -3,11 +3,12 @@ package game.entity.esm;
 import game.entity.Enemy;
 import game.entity.Entity;
 import game.entity.Player;
+import game.keyboard.KeyHandler;
 
 public class EntityStateManager {
     private EntityState state;
 
-    public EntityStateManager(Entity e){
+    public EntityStateManager(){
         this.state = EntityState.STATE_STANDING;
     }
 

@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 public class PlayLayer extends GameLayer {
     private SpriteSheet sprite;
     private Entity entity;
-    private EntityManager em;
+    private final EntityManager em;
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);

@@ -19,7 +19,8 @@ public abstract class Entity extends Animated {
     public Entity(SpriteSheet spriteSheet, Vector2D position, int maxFrames) {
         super(spriteSheet);
         this.position = position;
-        this.esm = new EntityStateManager(this);
+        this.esm = new EntityStateManager();
+        System.out.println(this.getCurrentFrame());
         super.changeAnimation(maxFrames);
     }
 
@@ -39,7 +40,7 @@ public abstract class Entity extends Animated {
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
 
-    public void update(){
+    public void updateState(){
         this.esm.update(this);
     }
 }
