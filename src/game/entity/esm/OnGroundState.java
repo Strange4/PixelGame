@@ -4,6 +4,13 @@ import game.entity.Entity;
 import game.keyboard.Key;
 
 public abstract class OnGroundState {
+    public EntityState state = EntityState.STATE_STANDING;
+
     public void handleInput(Entity entity, Key key){}
-    public void update(Entity entity){}
+    public static void update(Entity entity){
+        EntityState state = entity.getState();
+        if(state == EntityState.STATE_STANDING){
+            entity.resetAnimations();
+        }
+    }
 }
