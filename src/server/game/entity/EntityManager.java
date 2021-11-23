@@ -21,6 +21,13 @@ public class EntityManager {
     private void update() {
         spawnedEntities.forEach(this::checkDead);
         spawnedEntities.forEach(this::updateEntity);
+
+        spawnedEntities.forEach(entity -> {
+            if (entity instanceof HittableEntity) {
+                checkCollision((HittableEntity) entity);
+            }
+        });
+
     }
 
     private void updateEntity(Entity entity) {
@@ -28,13 +35,8 @@ public class EntityManager {
         entity.update();
     }
 
-    private void checkCollision() {
-        spawnedEntities.stream()
-                .filter(entity -> entity instanceof HittableEntity)
-                .forEach(entity -> {
-                    HittableEntity he = (HittableEntity) entity;
-                   he.onCollision(qt.retrieve(he.hitbox));
-                });
+    private void checkCollision(HittableEntity hittableEntity) {
+        hittableEntity.onCollision(qt.retrieve(hittableEntity.hitbox));
     }
 
     private void checkDead(Entity entity) {
