@@ -33,6 +33,14 @@ public class Vector2D {
         this.y += y;
     }
 
+    public Vector2D add(Vector2D element) {
+       return new Vector2D(this.x + element.x, this.y + element.y);
+    }
+
+    public Vector2D add(double x, double y) {
+        return new Vector2D(this.x + x, this.y + y);
+    }
+
     @Override
     public String toString() {
         return "Vector2D{" +
