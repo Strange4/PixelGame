@@ -33,6 +33,10 @@ public class Vector2D {
         this.y += y;
     }
 
+    public Vector2D add(double x, double y) {
+        return new Vector2D(this.x + x, this.y + y);
+    }
+
     public Vector2D add(Vector2D vector2D){
         return new Vector2D(vector2D.getX() + this.x, vector2D.getY() + this.y);
     }

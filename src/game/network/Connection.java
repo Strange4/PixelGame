@@ -54,7 +54,7 @@ public class Connection {
         String input = "";
 
         while (input != ":q") {
-            System.out.print("> ");
+            //System.out.print("> ");
             input = scanner.nextLine();
             chat = new Chat(input);
             try {
