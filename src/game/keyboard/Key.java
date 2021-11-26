@@ -17,7 +17,7 @@ public class Key {
         return this.keyCode;
     }
 
-    public void toggleIsPressed() {
-        this.isPressed = !this.isPressed;
+    public void setIsPressed(boolean state) {
+        this.isPressed = state;
     }
 }

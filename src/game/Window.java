@@ -15,7 +15,7 @@ public class Window extends JFrame {
 //        device.setFullScreenWindow(this);
 
 //        Normal
-        add(new GameCanvas(800, 450));
+        add(new GameCanvas(800, 800*9/16));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

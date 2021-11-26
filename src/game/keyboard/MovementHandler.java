@@ -21,19 +21,22 @@ public class MovementHandler implements KeyListener {
             switch (key.getKeyCode()) {
             case KeyEvent.VK_W:
                 // System.out.println("UP");
-                this.directional2DVector.addX(this.directional2DVector.getX() - 1);
+                this.directional2DVector.addY(-1);
                 break;
             case KeyEvent.VK_S:
                 // System.out.println("DOWN");
-                this.directional2DVector.addX(this.directional2DVector.getX() + 1);
+                this.directional2DVector.addY(1);
                 break;
             case KeyEvent.VK_D:
                 // System.out.println("RIGHT");
-                this.directional2DVector.addY(this.directional2DVector.getY() + 1);
+                this.directional2DVector.addX(1);
                 break;
             case KeyEvent.VK_A:
                 // System.out.println("LEFT");
-                this.directional2DVector.addY(this.directional2DVector.getY() - 1);
+                this.directional2DVector.addX(-1);
+                break;
+            case KeyEvent.VK_SPACE:
+                 System.out.println("DASH");
                 break;
             }
         }
@@ -49,7 +52,7 @@ public class MovementHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         for (Key key : this.keyboard.acceptedKeys) {
             if (e.getKeyCode() == key.getKeyCode()) {
-                key.toggleIsPressed();
+                key.setIsPressed(true);
             }
         }
     }
@@ -58,7 +61,7 @@ public class MovementHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         for (Key key : this.keyboard.acceptedKeys) {
             if (e.getKeyCode() == key.getKeyCode()) {
-                key.toggleIsPressed();
+                key.setIsPressed(false);
             }
         }
     }
