@@ -33,14 +33,21 @@ public class Vector2D {
         this.y += y;
     }
 
-    public void addVector(Vector2D movement){
-        this.x += movement.getX();
-        this.y += movement.getY();
+    public Vector2D add(Vector2D vector2D){
+        return new Vector2D(vector2D.getX() + this.x, vector2D.getY() + this.y);
     }
 
-    public void multiplyScalar(double scalar) {
-        this.x = this.x * scalar;
-        this.y = this.y * scalar;
+    /**
+     * subtracts the vector given to the current vector and returns a new vector
+     * @param vector2D the vector to be subtracted from the current vector
+     * @return a new vector that is the subtraction the current vector minus the given vector
+     */
+    public Vector2D subtract(Vector2D vector2D){
+        return new Vector2D(this.x - vector2D.getX(), this.y - vector2D.getY());
+    }
+
+    public Vector2D multiplyScalar(double scalar) {
+        return new Vector2D(this.x * scalar, this.y * scalar);
     }
 
     @Override
