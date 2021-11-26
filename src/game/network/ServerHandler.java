@@ -35,7 +35,7 @@ public class ServerHandler extends Network<ServerMessage, ClientMessage> {
     };
 
     private IClientMessageHandler<PlayerChat> onPlayerChat = message -> {
-        System.out.print("New message received.");
+        System.out.println(message.getContent());
     };
 
     @Override
