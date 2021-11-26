@@ -17,9 +17,11 @@ public class PlayLayer extends GameLayer {
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Bot Wheel/ken.png", 85, 85, false, false);
+        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, false);
+
         tl = new TileMap("Maps/try#2.tmx");
         entity = new Player(sprite, new Vector2D(50, 50));
+        entity.setDelayBetweenFrames(4,0);
     }
 
     @Override

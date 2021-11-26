@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TileObjectGroup {
     private String name;
-    private ArrayList<TileMapObject> objects;
+    private final ArrayList<TileMapObject> objects;
 
     public TileObjectGroup(String name){
         this.name = name;

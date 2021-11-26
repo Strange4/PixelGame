@@ -19,7 +19,7 @@ public abstract class Animated {
         loadAnimations();
     }
 
-    public void changeAnimationDelay(int delayBetweenFrames, int animationNumber){
+    public void setDelayBetweenFrames(int delayBetweenFrames, int animationNumber){
         animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
     }
 
