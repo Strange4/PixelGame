@@ -9,7 +9,7 @@ import game.util.Vector2D;
 public abstract class Entity extends Animated {
     protected final int WIDTH = this.spriteSheet.getSPRITE_WIDTH();
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
-    protected double speed = 0.5;
+    protected double speed = 3;
     protected EntityState state;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);

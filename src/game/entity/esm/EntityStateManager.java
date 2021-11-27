@@ -34,6 +34,9 @@ public class EntityStateManager {
         if(key != null){
             last = key.getKeyCode();
         } else {
+            this.state = EntityState.STATE_STANDING;
+            player.setState(this.state);
+            OnGroundState.update(player);
             return;
         }
         switch (last){
@@ -43,11 +46,8 @@ public class EntityStateManager {
             case KeyEvent.VK_S:
                 // When we get a movement key pressed we want to get
                 this.state = EntityState.STATE_WALKING;
+                player.setState(this.state);
                 WalkingState.update(player, kh.getDirectionalVector());
-                break;
-            default:
-                this.state = EntityState.STATE_STANDING;
-                OnGroundState.update(player);
                 break;
         }
     }
