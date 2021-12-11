@@ -53,6 +53,14 @@ public abstract class Entity extends Animated {
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
 
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
     public void updateState(){
         this.esm.update(this);
     }

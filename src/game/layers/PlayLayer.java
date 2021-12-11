@@ -34,11 +34,9 @@ public class PlayLayer extends GameLayer {
         this.em = new EntityManager();
         this.em.addEntity(entity);
         this.em.addEntity(new Enemy(sprite, new Vector2D(50, 50)));
-        addRandomEntity();
-        addRandomEntity();
-        addRandomEntity();
-        addRandomEntity();
-        addRandomEntity();
+        for(int i = 0; i < 10; i++){
+            addRandomEntity();
+        }
     }
 
     public void addRandomEntity(){
@@ -69,6 +67,7 @@ public class PlayLayer extends GameLayer {
             CURRENT_DESPAWN = 0;
             addRandomEntity();
             killRandomEntity();
+            System.out.println("Points: " + this.em.getPlayer().getPoints());
         }
         this.em.update();
     }
@@ -82,5 +81,10 @@ public class PlayLayer extends GameLayer {
 //        camera.renderMap(graphics2D,tl,3);
         tl.render(graphics2D, 400,225, 500, 800, 400, 225);
         this.em.render(graphics2D, scale * 0.5);
+        graphics2D.setColor(Color.orange);
+        graphics2D.fillRect(0, 0, 100, 30);
+        graphics2D.setColor(Color.black);
+        graphics2D.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        graphics2D.drawString("Points: " + this.em.getPlayer().getPoints(), 2, 20);
     }
 }
