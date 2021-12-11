@@ -1,6 +1,6 @@
 package common.message.server;
 
-import game.entity.Player;
+import game.entity.types.Player;
 
 public final class LoginAnswer extends ServerMessage<Player[]> {
 

@@ -5,9 +5,10 @@ import common.message.HandlerProvider;
 import common.message.client.Auth;
 import common.message.client.Chat;
 import common.message.client.ClientMessage;
+import common.message.server.PlayerChat;
 import common.message.server.ServerMessage;
 import common.network.Network;
-import game.entity.Player;
+import game.entity.types.Player;
 import server.Server;
 import server.message.IServerMessageHandler;
 
@@ -47,7 +48,9 @@ public class ClientHandler extends Network<ClientMessage, ServerMessage> {
     private IServerMessageHandler<Chat> onChat = message -> {
         //server.sendToAllExceptCaller(this, new Chat(message.getContent(), this.player.id));
         //System.out.println("[" + this.player.name + "]: " + message.getContent());
-        System.out.println("New chat message received.");
+        System.out.println(message.getContent());
+        server.sendToAllExceptCaller(this, new PlayerChat(message.getContent(), 1));
+        //System.out.println("New chat message received.");
     };
 
     @Override

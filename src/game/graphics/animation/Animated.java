@@ -32,6 +32,7 @@ public abstract class Animated {
     public void updateAnimation(){
         animations[currentAnimation].update();
     }
+
     public void changeAnimation(int animationNumber){
         for(int i=0;i<animations.length;i++){
             if(i != animationNumber){
@@ -44,4 +45,15 @@ public abstract class Animated {
     public BufferedImage getCurrentFrame(){
         return animations[currentAnimation].getCurrentFrame();
     }
+
+    public void changeDelayForAnimation(int delayBetweenFrames, int animationNumber) {
+        animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
+    }
+
+    public void resetAnimations(){
+        for(Animation a : animations){
+            a.resetAnimation();
+        }
+    }
 }
+

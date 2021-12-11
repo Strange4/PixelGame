@@ -25,4 +25,13 @@ public class Keyboard extends ArrayList<Key> {
         }
         return pressedKeys.toArray(new Key[pressedKeys.size()]);
     }
+
+    public Key getLastPressedKey(){
+        Key[] keys = getPressedKeys();
+        if(keys.length > 0){
+            return keys[keys.length - 1];
+        } else {
+            return null;
+        }
+    }
 }

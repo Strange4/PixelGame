@@ -7,7 +7,7 @@ import common.message.server.LoginAnswer;
 import common.message.server.PlayerChat;
 import common.message.server.ServerMessage;
 import common.network.Network;
-import game.entity.Player;
+import game.entity.types.Player;
 import game.network.handlers.IClientMessageHandler;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class ServerHandler extends Network<ServerMessage, ClientMessage> {
     };
 
     private IClientMessageHandler<PlayerChat> onPlayerChat = message -> {
-        System.out.print("New message received.");
+        System.out.println(message.getContent());
     };
 
     @Override

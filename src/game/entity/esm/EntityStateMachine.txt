@@ -1,0 +1,73 @@
+Managing entities:
+
+Mechanics:
+
+    Player:
+        Whenever there's any input from the keyboard, we have to check if the key pressed
+        changes the state of the player (See EntityState.java enum for all the states that
+        apply to any entity. Not all states must be applied to all entities). If it does then
+        we need to pass that state to the EntityStateManager which will hold a switch statement
+        executing the methods associated to that state.
+
+    Enemies:
+        First, each enemy will check if the player is in their detection radius. Then we trigger
+        the pathfinding algorithm while the enemy is alive and hasn't attacked the player. When
+        then enemy has found the player, it attacks and goes back to the previous step of finding
+        the player if the player is out of the attack radius. We can do that by changing the state
+        of the enemy, so it is aggroed to the player. This helps for further attacks as this state
+        will keep on triggering the pathfinding and the attacking until either the player or the
+        enemy itself is dead. The trigger of the pathfinder can also be stopped when the player is
+        out of the detection radius of the enemy.
+        Pathfinder:
+            The pathfinder will be triggered when the player is in radius. It will find the fastest
+            way to get to the player. Then, it will queue the first movement that the enemy needs to do
+            reach the enemy. After moving to a tile, it will have to check if the player has moved, if it
+            hasn't then the pathfinder continues with the next step until the player is within attack range.
+            However, if the player has moved and is within detection range of the enemy, then the pathfinder
+            will have to find a new path to the player, erasing the queue of the last path and replacing it
+            with the queue of the new path.
+        Attack range:
+            The enemy will have an attack range and an attack will trigger when the player is within that range.
+        Problem:
+            A problem here is walls, and there is a solution. Because the pathfinder checks for the
+            fastest way to get to the player, it will have to check each tile on its way. If a tile
+            is a wall tile then the pathfinder will have to go around it. However, if the pathfinder
+            keeps on going to the adjacent tile until the next tile is out of the radius. Then it won't
+            find a way to the player, meaning that the enemy won't even move.
+
+    Passive:
+            These entities won't need any fancy pathfinding algorithm, instead they will have a simple
+            algorithm that makes them move from tile to tile randomly through time. The passive will be
+            too "dumb" to realize it's getting killed, or it won't have enough HP to survive more than
+            one blow.
+
+########################
+IMPORTANT:
+    Only one unique state can be applied per tick per entity, on entity can have more than
+    one simultaneous state.
+########################
+
+Implementation:
+    Making a state interface with methods
+        - handleInput(entity) -- only on the player
+        - update(entity) -- on every entity, based on the state
+
+    Making a superstate class for the categories of states. If the substate
+    doesn't handle it, it's going to roll up the chain of superstates.
+
+    Making a class for each state, each state will check if it's associate
+    input is triggered, and it will execute logic for that state.
+
+    After that, we need to delegate a state to each entity, if the class of
+    a state returns that the state is in action, then we erase the old state
+    of the entity and replace it with that new state.
+
+    Because we have guns, we will have two state machines, one for the player
+    and one for the equipment it is holding.
+
+    We will also have a state stack for holding the previous and current state,
+    so we can transition between each. When we push a state, its animation starts
+    and the state gets popped from the stack when its animation is done.
+
+    Finally, we need to check the state of each entity on every tick and update it
+    accordingly.
