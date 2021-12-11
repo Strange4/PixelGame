@@ -46,9 +46,9 @@ public class EntityManager {
     }
 
     public void render(Graphics2D graphics2D, double scale){
-        for(int i = 0; i < entities.size(); i++){
-            Entity entity = entities.get(i);
+        for(Entity entity : entities){
             BufferedImage img = entity.getCurrentFrame();
+            graphics2D.drawRect((int) (entity.getX()), (int) (entity.getY()), entity.getWIDTH(), entity.HEIGHT);
             graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), (int) (img.getWidth() * scale), (int) (img.getHeight() * scale), null);
         }
     }
