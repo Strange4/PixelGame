@@ -26,24 +26,24 @@ public class PlayLayer extends GameLayer {
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
+        AnimationSpriteSheet playerSprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
         tl = new TileMap("Maps/try#2.tmx");
-        Player entity = new Player(sprite, new Vector2D(50, 50));
+        Player entity = new Player(playerSprite, new Vector2D(50, 50));
         entity.setDelayBetweenFrames(4,0);
         camera = new Camera(entity,2,400, 225);
         this.em = new EntityManager();
         this.em.addEntity(entity);
-        this.em.addEntity(new Enemy(sprite, new Vector2D(50, 50)));
         for(int i = 0; i < 10; i++){
             addRandomEntity();
         }
     }
 
     public void addRandomEntity(){
-        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
+        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/chorus_fruit.png", 32, 32, false, true);
         Random r = new Random();
         Vector2D v = new Vector2D(r.nextInt(700),r.nextInt(400));
         Enemy enemy = new Enemy(sprite, v);
+        enemy.setScale(1.15);
         this.em.addEntity(enemy);
     }
 
@@ -62,6 +62,7 @@ public class PlayLayer extends GameLayer {
 
     @Override
     public void update() {
+        if(this.em.getEnemies().size() == 0)
         this.CURRENT_DESPAWN++;
         if(CURRENT_DESPAWN == DESPAWN_TICK){
             CURRENT_DESPAWN = 0;

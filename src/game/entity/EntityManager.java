@@ -48,8 +48,8 @@ public class EntityManager {
     public void render(Graphics2D graphics2D, double scale){
         for(Entity entity : entities){
             BufferedImage img = entity.getCurrentFrame();
-            graphics2D.drawRect((int) entity.getX(), (int) entity.getY(), (int) (entity.getWIDTH() * scale), (int) (entity.getHEIGHT() * scale));
-            graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), (int) (img.getWidth() * scale), (int) (img.getHeight() * scale), null);
+            graphics2D.drawRect((int) entity.getX(), (int) entity.getY(), (int) (entity.getWIDTH() * entity.getScale()), (int) (entity.getHEIGHT() * entity.getScale()));
+            graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), (int) (img.getWidth() * entity.getScale()), (int) (img.getHeight() * entity.getScale()), null);
         }
     }
 
@@ -66,7 +66,8 @@ public class EntityManager {
     }
 
     public boolean collides(Player player, Enemy enemy){
-        if((player.getX() + player.getWIDTH()) * scale > enemy.getX() * scale && player.getX()* scale < (enemy.getX() + enemy.getWIDTH()) * scale && (player.getY() + player.getHEIGHT()) * scale > enemy.getY() * scale && player.getY() * scale < (enemy.getY() + enemy.getHEIGHT()) * scale) return true;
+//        System.out.println(scale);
+        if((player.getX() + (player.getWIDTH() * player.getScale()))  > enemy.getX()  && player.getX() < (enemy.getX() + (enemy.getWIDTH() * enemy.getScale()))  && (player.getY() + (player.getHEIGHT() * player.getScale()))  > enemy.getY()  && player.getY()  < (enemy.getY() + (enemy.getHEIGHT() * enemy.getScale())) ) return true;
         return false;
     }
 
