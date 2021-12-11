@@ -7,8 +7,8 @@ import java.io.IOException;
 public class SpriteSheet {
     protected final BufferedImage SPRITESHEET;
     protected BufferedImage[][] ALL_SPRITES; // Row then column
-    protected final int SPRITE_WIDTH;
-    protected final int SPRITE_HEIGHT;
+    protected int SPRITE_WIDTH;
+    protected int SPRITE_HEIGHT;
     protected int SPRITE_COL_COUNT;
     protected int SPRITE_ROW_COUNT;
 
@@ -73,5 +73,13 @@ public class SpriteSheet {
 
     public int getSPRITE_HEIGHT() {
         return SPRITE_HEIGHT;
+    }
+
+    public void setSPRITE_WIDTH(int SPRITE_WIDTH) {
+        this.SPRITE_WIDTH = SPRITE_WIDTH;
+    }
+
+    public void setSPRITE_HEIGHT(int SPRITE_HEIGHT) {
+        this.SPRITE_HEIGHT = SPRITE_HEIGHT;
     }
 }

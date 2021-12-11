@@ -45,7 +45,6 @@ public class AnimationSpriteSheet extends SpriteSheet {
                         }
                     }
                 }
-
             }
         }
     }
@@ -57,6 +56,12 @@ public class AnimationSpriteSheet extends SpriteSheet {
         int maxX = bounds[1].width;
         int maxY = bounds[1].height;
 
+        if(this.getSPRITE_HEIGHT()>maxY-minY){
+            this.setSPRITE_HEIGHT(maxY-minY);
+        }
+        if(this.getSPRITE_WIDTH()>maxX-minX){
+            this.setSPRITE_WIDTH(maxX-minX);
+        }
         return frame.getSubimage(minX, minY, maxX-minX, maxY-minY);
     }
 
