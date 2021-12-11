@@ -13,10 +13,8 @@ public class DashingState extends OnGroundState{
             if ((System.currentTimeMillis() - lastUsed) >= 0) {
                 lastUsed = System.currentTimeMillis();
                 Vector2D oldMovement = entity.getLastMovement();
-//                System.out.println("a: " + oldMovement);
                 entity.move(oldMovement.multiplyScalar(2));
                 entity.setLastMovement(oldMovement);
-//                System.out.println("b: " + entity.getLastMovement() + "\n");
                 entity.updateAnimation();
             }
         } else {

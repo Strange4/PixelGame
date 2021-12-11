@@ -2,6 +2,7 @@ package game.layers;
 
 import game.entity.Entity;
 import game.entity.EntityManager;
+import game.entity.types.Enemy;
 import game.entity.types.Player;
 import game.graphics.SpriteSheet;
 import game.keyboard.KeyHandler;
@@ -17,18 +18,14 @@ public class PlayLayer extends GameLayer {
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-//        sprite = ;
-//        entity = ;
         this.em = new EntityManager();
         this.em.addEntity(new Player(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(50, 50), 6));
-        this.em.addEntity(new Player(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(100, 100), 6));
-////        entity.changeAnimation(6);
+        this.em.addEntity(new Enemy(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(50, 50), 6));
     }
 
     @Override
     public void update() {
         this.em.update();
-//        entity.updateAnimation();
     }
 
     @Override
