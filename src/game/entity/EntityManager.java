@@ -1,5 +1,7 @@
 package game.entity;
 
+import game.entity.esm.EntityState;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -12,12 +14,19 @@ public class EntityManager {
     }
 
     public void update(){
-        for(int i = 0; i < entities.size(); i++){
+        for(int i=0;i<this.entities.size();i++){
+            entities.get(i).updateState();
+             if(entities.get(i).getState() == EntityState.STATE_DEAD){
+                 removeEntity(entities.get(i));
+             }
             // This works
 //            entities.get(i).updateAnimation();
             // This doesn't
-            entities.get(i).updateState();
         }
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
     }
 
     public void render(Graphics2D graphics2D, double scale){
