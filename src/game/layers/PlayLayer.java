@@ -88,10 +88,5 @@ public class PlayLayer extends GameLayer {
         this.em.getPlayer().setScale(scale);
         tl.render(graphics2D, 400,225, 500, 800, 400, 225);
         this.em.render(graphics2D, scale);
-        graphics2D.setColor(Color.orange);
-        graphics2D.fillRect(0, 0, 100, 30);
-        graphics2D.setColor(Color.black);
-        graphics2D.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        graphics2D.drawString("Points: " + this.em.getPlayer().getPoints(), 2, 20);
     }
 }
