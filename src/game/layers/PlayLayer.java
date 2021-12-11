@@ -21,6 +21,7 @@ public class PlayLayer extends GameLayer {
 //        entity = ;
         this.em = new EntityManager();
         this.em.addEntity(new Player(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(50, 50), 6));
+        this.em.addEntity(new Player(new SpriteSheet("Bot Wheel/ken.png", 85, 85, false, false), new Vector2D(100, 100), 6));
 ////        entity.changeAnimation(6);
     }
 

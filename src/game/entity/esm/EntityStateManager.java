@@ -1,7 +1,8 @@
 package game.entity.esm;
 
-import game.entity.types.Enemy;
 import game.entity.Entity;
+import game.entity.types.Enemy;
+import game.entity.types.Passive;
 import game.entity.types.Player;
 import game.keyboard.Key;
 import game.keyboard.KeyHandler;
@@ -49,7 +50,13 @@ public class EntityStateManager {
                 player.setState(this.state);
                 WalkingState.update(player, kh.getDirectionalVector());
                 break;
+            case KeyEvent.VK_SPACE:
+                    this.state = EntityState.STATE_DASHING;
+                    player.setState(this.state);
+                    DashingState.update(player);
+                break;
         }
+
     }
     private void handleEnemy(Enemy enemy){
 //        enemy.updateAnimation();

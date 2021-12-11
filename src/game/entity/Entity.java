@@ -9,7 +9,8 @@ import game.util.Vector2D;
 public abstract class Entity extends Animated {
     protected final int WIDTH = this.spriteSheet.getSPRITE_WIDTH();
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
-    protected double speed = 3;
+    protected final double BASESPEED = 3;
+    protected double modifiedSpeed = BASESPEED;
     protected EntityState state;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);
@@ -25,17 +26,32 @@ public abstract class Entity extends Animated {
     }
 
     public void move(Vector2D movement){
-        this.lastMovement.setX(movement.getX());
-        this.lastMovement.setY(movement.getY());
-        this.position.addX(movement.getX() * this.speed);
-        this.position.addY(movement.getY() * this.speed);
+        movement = movement.multiplyScalar(this.BASESPEED);
+        this.lastMovement = movement;
+        this.position = this.position.addVector(movement);
+//        this.lastMovement.setX(this.position.getX());
+//        this.lastMovement.setY(this.position.getY());
+//        this.position.addX(movement.getX() * this.modifiedSpeed);
+//        this.position.addY(movement.getY() * this.modifiedSpeed);
     }
 
     public EntityState getState(){return this.state;}
     public void setState(EntityState state){this.state = state;}
 
-    public void setSPEED(double speed){this.speed = speed;}
-    public double getSpeed(){return this.speed;}
+    public void setModifiedSpeed(double speed){this.modifiedSpeed = speed;}
+    public double getModifiedSpeed(){return this.modifiedSpeed;}
+
+    public double getBASESPEED() {
+        return BASESPEED;
+    }
+
+    public Vector2D getLastMovement() {
+        return this.lastMovement;
+    }
+
+    public void setLastMovement(Vector2D lastMovement) {
+        this.lastMovement = lastMovement;
+    }
 
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
