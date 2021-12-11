@@ -7,7 +7,7 @@ import game.util.MouseHandler;
 import java.awt.*;
 
 public abstract class GameLayer {
-    private GameLayerManager glm;
+    protected GameLayerManager glm;
     public GameLayer(GameLayerManager glm){
         this.glm = glm;
     }

@@ -60,9 +60,14 @@ public class PlayLayer extends GameLayer {
         randomEnemy.setState(EntityState.STATE_DEAD);
     }
 
+    private void gameOver(){
+        this.glm.addState(new GameOverLayer(this.glm));
+        this.glm.removeState(this);
+    }
+
     @Override
     public void update() {
-        if(this.em.getEnemies().size() == 0)
+        if(this.em.getEnemies().size() == 0) gameOver();
         this.CURRENT_DESPAWN++;
         if(CURRENT_DESPAWN == DESPAWN_TICK){
             CURRENT_DESPAWN = 0;

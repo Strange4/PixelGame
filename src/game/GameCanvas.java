@@ -1,12 +1,9 @@
 package game;
 
-import game.entity.EntityManager;
 import game.keyboard.KeyHandler;
 import game.keyboard.Keyboard;
-import game.keyboard.MovementHandler;
 import game.layers.GameLayerManager;
 import game.util.MouseHandler;
-import game.util.Vector2D;
 import java.awt.event.KeyEvent;
 
 import java.awt.*;
@@ -15,6 +12,7 @@ import java.awt.image.BufferStrategy;
 public class GameCanvas extends Canvas implements Runnable {
     public final int width;
     public final int height;
+    public static final long GAME_START = System.nanoTime();
 
     private Thread thread;
     private boolean running;
