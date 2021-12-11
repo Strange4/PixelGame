@@ -32,11 +32,11 @@ public class EntityManager {
         this.entities.add(e);
     }
 
-    public void removeEntityObj(Entity e){
+    public void removeEntity(Entity e){
         this.entities.remove(e);
     }
 
-    public void removeEntityPos(int i){
+    public void removeEntity(int i){
         this.entities.remove(i);
     }
 
