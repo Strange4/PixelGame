@@ -67,7 +67,6 @@ public class PlayLayer extends GameLayer {
             CURRENT_DESPAWN = 0;
             addRandomEntity();
             killRandomEntity();
-            System.out.println("Points: " + this.em.getPlayer().getPoints());
         }
         this.em.update();
     }
@@ -79,8 +78,10 @@ public class PlayLayer extends GameLayer {
     @Override
     public void render(Graphics2D graphics2D, int scale) {
 //        camera.renderMap(graphics2D,tl,3);
+        this.em.setScale(scale);
+        this.em.getPlayer().setScale(scale);
         tl.render(graphics2D, 400,225, 500, 800, 400, 225);
-        this.em.render(graphics2D, scale * 0.5);
+        this.em.render(graphics2D, scale);
         graphics2D.setColor(Color.orange);
         graphics2D.fillRect(0, 0, 100, 30);
         graphics2D.setColor(Color.black);

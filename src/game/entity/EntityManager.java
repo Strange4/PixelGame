@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class EntityManager {
-    ArrayList<Entity> entities;
+    private ArrayList<Entity> entities;
+    private double scale;
 
     public EntityManager(){
         this.entities = new ArrayList<>();
@@ -36,7 +37,6 @@ public class EntityManager {
             if(collides(player, enemy)){
                 enemy.setState(EntityState.STATE_DEAD);
                 player.addPoint();
-                System.out.println("collision");
             }
         }
     }
@@ -46,8 +46,7 @@ public class EntityManager {
     }
 
     public void render(Graphics2D graphics2D, double scale){
-        for(int i = 0; i < entities.size(); i++){
-            Entity entity = entities.get(i);
+        for(Entity entity : entities){
             BufferedImage img = entity.getCurrentFrame();
             graphics2D.drawRect((int) entity.getX(), (int) entity.getY(), (int) (entity.getWIDTH() * scale), (int) (entity.getHEIGHT() * scale));
             graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), (int) (img.getWidth() * scale), (int) (img.getHeight() * scale), null);
@@ -67,7 +66,7 @@ public class EntityManager {
     }
 
     public boolean collides(Player player, Enemy enemy){
-        if(player.getX() + player.getWIDTH() > enemy.getX() && player.getX() < enemy.getX() + enemy.getWIDTH() && player.getY() + player.getHEIGHT() > enemy.getY() && player.getY() < enemy.getY() + enemy.getHEIGHT()) return true;
+        if((player.getX() + player.getWIDTH()) * scale > enemy.getX() * scale && player.getX()* scale < (enemy.getX() + enemy.getWIDTH()) * scale && (player.getY() + player.getHEIGHT()) * scale > enemy.getY() * scale && player.getY() * scale < (enemy.getY() + enemy.getHEIGHT()) * scale) return true;
         return false;
     }
 
@@ -88,6 +87,10 @@ public class EntityManager {
             }
         }
         return enemyArrayList;
+    }
+
+    public void setScale(double scale){
+        this.scale = scale;
     }
 
 }

@@ -11,6 +11,7 @@ public abstract class Entity extends Animated {
     protected final int HEIGHT = this.spriteSheet.getSPRITE_HEIGHT();
     protected final double BASESPEED = 3;
     protected double modifiedSpeed = BASESPEED;
+    protected double scale = 1;
     protected EntityState state;
     protected Vector2D position;
     protected Vector2D lastMovement = new Vector2D(0,0);
@@ -25,7 +26,12 @@ public abstract class Entity extends Animated {
     public void move(Vector2D movement){
         movement = movement.multiplyScalar(this.BASESPEED);
         this.lastMovement = movement;
-        this.position = this.position.add(movement);
+        Vector2D newPosition =  this.position.add(movement);
+        if(newPosition.getX() < 0) newPosition.setX(0);
+        if(newPosition.getY() < 0) newPosition.setY(0);
+        if(newPosition.getX() > 800 - (WIDTH * scale)) newPosition.setX(800 - (WIDTH * scale));
+        if(newPosition.getY() > 450 - (HEIGHT * scale)) newPosition.setY(450 - (HEIGHT * scale));
+        this.position = newPosition;
     }
 
     public EntityState getState(){return this.state;}
@@ -53,14 +59,6 @@ public abstract class Entity extends Animated {
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
 
-    public int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public int getWIDTH() {
-        return WIDTH;
-    }
-
     public void updateState(){
         this.esm.update(this);
     }
@@ -71,5 +69,12 @@ public abstract class Entity extends Animated {
 
     public int getHEIGHT() {
         return HEIGHT;
+    }
+    public double getScale() {
+        return scale;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
     }
 }
