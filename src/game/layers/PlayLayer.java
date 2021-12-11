@@ -2,6 +2,7 @@ package game.layers;
 
 import game.entity.Entity;
 import game.entity.Player;
+import game.graphics.Camera;
 import game.graphics.sheets.AnimationSpriteSheet;
 import game.graphics.tilemap.TileMap;
 import game.keyboard.MovementHandler;
@@ -14,14 +15,15 @@ import java.awt.image.BufferedImage;
 public class PlayLayer extends GameLayer {
     private Entity entity;
     private TileMap tl;
+    private Camera camera;
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, false);
-
+        AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
         tl = new TileMap("Maps/try#2.tmx");
         entity = new Player(sprite, new Vector2D(50, 50));
         entity.setDelayBetweenFrames(4,0);
+        camera = new Camera(entity,2,400, 225);
     }
 
     @Override
@@ -37,8 +39,10 @@ public class PlayLayer extends GameLayer {
     @Override
     public void render(Graphics2D graphics2D, int scale) {
         BufferedImage img = entity.getCurrentFrame();
-        tl.render(graphics2D, 400,225, 500, 800, 400, 225);
+        camera.renderMap(graphics2D,tl,3);
+//        tl.render(graphics2D, 400,225, 500, 800, 400, 225);
 //        graphics2D.drawImage(img, 50, 50, img.getWidth() * scale, img.getHeight() * scale, null);
         graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), img.getWidth() * scale, img.getHeight() * scale, null);
+        graphics2D.drawRect((int) entity.getX(),(int) entity.getY(),img.getWidth() * scale, img.getHeight() * scale);
     }
 }

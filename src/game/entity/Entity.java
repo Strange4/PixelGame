@@ -25,6 +25,10 @@ public abstract class Entity extends Animated {
 
     public void setSPEED(double speed){this.speed = speed;}
 
+    public Vector2D getPosition(){
+        return this.position;
+    }
+
     public double getX(){ return this.position.getX(); }
     public double getY(){ return this.position.getY(); }
 }

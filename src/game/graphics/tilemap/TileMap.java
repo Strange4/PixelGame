@@ -1,5 +1,6 @@
 package game.graphics.tilemap;
 
+import game.util.Vector2D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -149,14 +150,22 @@ public class TileMap {
         if(mapPosY - renderDistanceY > this.mapHeight * this.tileHeight) {
             throw new IllegalArgumentException("the render distance y: " + renderDistanceY + ", at mapPosY: " + mapPosY + ", is too small to see the map");
         }
-
         // if the renderDistance is outside the map, render until the end of it
         int renderFromX = Math.max(mapPosX - renderDistanceX, 0);
         int renderFromY = Math.max(mapPosY - renderDistanceY, 0);
         int renderWidth = Math.min(renderDistanceX * 2, (this.mapWidth * this.tileWidth) - renderFromX);
         int renderHeight = Math.min(renderDistanceY * 2, (this.mapHeight * this.tileHeight) - renderFromY);
         graphics2D.drawImage(this.levelImage.getSubimage(renderFromX, renderFromY, renderWidth, renderHeight),posX-renderDistanceX, posY-renderDistanceY, renderWidth, renderHeight, null);
-        graphics2D.setColor(Color.BLUE);
-        graphics2D.drawRect(posX-renderDistanceX, posY - renderDistanceY, renderDistanceX * 2, renderDistanceY *2);
+    }
+
+    public BufferedImage getMapImage(int mapPosX, int mapPosY, int width, int height){
+        return this.levelImage.getSubimage(mapPosX, mapPosY, width, height);
+    }
+
+    public int getMapWidth(){
+        return this.mapWidth * tileWidth;
+    }
+    public int getMapHeight(){
+        return this.mapHeight * tileHeight;
     }
 }

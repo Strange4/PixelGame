@@ -107,11 +107,6 @@ public class GameCanvas extends Canvas implements Runnable {
 //             while (((now - lastRenderTime) < TOTAL_TIME_BEFORE_RENDER) && ((now -
 //             lastUpdateTime) < MIN_TIME_BEFORE_UPDATE) ){
 //             Thread.yield();
-//             try {
-//             Thread.sleep(1);
-//             } catch (InterruptedException e) {
-//             e.printStackTrace();
-//             }
 //             now = System.nanoTime();
 //             }
         }
