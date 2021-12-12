@@ -31,42 +31,6 @@ public final class KeyHandler implements KeyListener {
         return this.mh.getDirectional2DVector();
     }
 
-//    public void handleKey() {
-//        Key[] pressed = keyboard.getPressedKeys();
-//        for (Key key : pressed) {
-//            switch (key.getKeyCode()) {
-//                case KeyEvent.VK_W:
-//                    System.out.println("UP");
-//                    break;
-//                case KeyEvent.VK_S:
-//                    System.out.println("DOWN");
-////                    return "DOWN";
-//                    break;
-//                case KeyEvent.VK_A:
-//                    System.out.println("LEFT");
-////                    return "LEFT";
-//                    break;
-//                case KeyEvent.VK_D:
-//                    System.out.println("RIGHT");
-////                    return "RIGHT";
-//                    break;
-//                case KeyEvent.VK_SPACE:
-//                    System.out.println("DASH");
-////                    return "DASH";
-//                    break;
-//                case KeyEvent.VK_ESCAPE:
-//                    System.out.println("PAUSE");
-////                    return "PAUSE";
-//                    break;
-//                case KeyEvent.VK_Q:
-//                    System.out.println("SECONDARY");
-////                    return "SECONDARY";
-//                    break;
-//            }
-//        }
-////        return "NULL";
-//    }
-    // Not used but has to be implemented
     @Override
     public void keyTyped(KeyEvent e) {}
 

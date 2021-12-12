@@ -23,10 +23,6 @@ public class EntityManager {
             if(entities.get(i).getState() == EntityState.STATE_DEAD){
                 removeEntity(entities.get(i));
             }
-
-            // This works
-//            entities.get(i).updateAnimation();
-            // This doesn't
         }
     }
 
@@ -65,7 +61,6 @@ public class EntityManager {
     }
 
     public boolean collides(Player player, Enemy enemy){
-//        System.out.println(scale);
         if((player.getX() + (player.getWIDTH() * player.getScale()))  > enemy.getX()  && player.getX() < (enemy.getX() + (enemy.getWIDTH() * enemy.getScale()))  && (player.getY() + (player.getHEIGHT() * player.getScale()))  > enemy.getY()  && player.getY()  < (enemy.getY() + (enemy.getHEIGHT() * enemy.getScale())) ) return true;
         return false;
     }

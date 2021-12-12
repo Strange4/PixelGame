@@ -25,7 +25,6 @@ public class ServerHandler extends Network<ServerMessage, ClientMessage> {
     public ServerHandler(Socket socket) {
         super(socket);
 
-        // TODO allow multiple handlers per class.
         this.handlerProvider.addHandler(LoginAnswer.class, onLogin);
         this.handlerProvider.addHandler(PlayerChat.class, onPlayerChat);
     }

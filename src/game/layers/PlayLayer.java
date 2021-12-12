@@ -21,7 +21,7 @@ public class PlayLayer extends GameLayer {
     private TileMap tl;
     private Camera camera;
     private final EntityManager em;
-    private final int DESPAWN_TICK = 50;
+    private final int DESPAWN_TICK = 40;
     private int CURRENT_DESPAWN = 0;
     public final long GAME_START = System.nanoTime();
 
@@ -85,7 +85,6 @@ public class PlayLayer extends GameLayer {
 
     @Override
     public void render(Graphics2D graphics2D, int scale) {
-//        camera.renderMap(graphics2D,tl,3);
         this.em.setScale(scale);
         this.em.getPlayer().setScale(scale);
         tl.render(graphics2D, 400,225, 500, 800, 400, 225);

@@ -29,8 +29,6 @@ public class Hitbox {
         this.setBottom();
     }
 
-    // TODO check performance.
-    // Does this even work?
     public boolean isCollision(Hitbox secondHitBox) {
         if (this.bonds.getX() >= secondHitBox.bonds.getX() + secondHitBox.bonds.getWidth()) return false;
         if (this.bonds.getY() >= secondHitBox.bonds.getY() + secondHitBox.bonds.getHeight()) return false;

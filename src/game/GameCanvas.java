@@ -19,7 +19,6 @@ public class GameCanvas extends Canvas implements Runnable {
     private final KeyHandler keyHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
-//    private EntityManager em;
 
     public GameCanvas(int width, int height) {
         this.width = width;
@@ -32,7 +31,6 @@ public class GameCanvas extends Canvas implements Runnable {
         this.keyHandler = KeyHandler.getInstance();
         this.keyHandler.init(keyboard);
         addKeyListener(this.keyHandler);
-//        this.em = new EntityManager();
     }
 
     @Override
@@ -48,7 +46,6 @@ public class GameCanvas extends Canvas implements Runnable {
         running = true;
         createBufferStrategy(3);
         mouse = new MouseHandler();
-        //key = new KeyHandler();
         gsm = new GameLayerManager();
         bs = getBufferStrategy();
     }
@@ -81,7 +78,6 @@ public class GameCanvas extends Canvas implements Runnable {
             while ((now - lastUpdateTime) > MIN_TIME_BEFORE_UPDATE && (updateCount < MIN_UPDATES_BEFORE_RENDER)) {
                 input();
                 update();
-                //input(mouse, key);
                 lastUpdateTime += MIN_TIME_BEFORE_UPDATE;
                 updateCount++;
             }
@@ -105,12 +101,6 @@ public class GameCanvas extends Canvas implements Runnable {
                 frameCount = 0;
                 lastSecond = thisSecond;
             }
-            // sets the max frame count and lets the computer breath before looping again
-//             while (((now - lastRenderTime) < TOTAL_TIME_BEFORE_RENDER) && ((now -
-//             lastUpdateTime) < MIN_TIME_BEFORE_UPDATE) ){
-//             Thread.yield();
-//             now = System.nanoTime();
-//             }
         }
     }
 
