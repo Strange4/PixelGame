@@ -19,19 +19,15 @@ public class MovementHandler {
         for (Key key : pressed) {
             switch (key.getKeyCode()) {
                 case KeyEvent.VK_W:
-                    // System.out.println("UP");
                     this.directional2DVector.addY(-1);
                     break;
                 case KeyEvent.VK_S:
-                    // System.out.println("DOWN");
                     this.directional2DVector.addY(1);
                     break;
                 case KeyEvent.VK_D:
-                    // System.out.println("RIGHT");
                     this.directional2DVector.addX(1);
                     break;
                 case KeyEvent.VK_A:
-                    // System.out.println("LEFT");
                     this.directional2DVector.addX(-1);
                     break;
             }

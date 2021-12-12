@@ -20,9 +20,7 @@ public class EntityStateManager {
         if(e instanceof Player){
             handlePlayer((Player) e);
         } else if(e instanceof Enemy){
-            handleEnemy((Enemy) e);
-        } else if(e instanceof Passive){
-            handlePassive((Passive) e);
+            // Do nothing
         } else {
             throw new IllegalArgumentException("Entity not supported");
         }
@@ -45,7 +43,6 @@ public class EntityStateManager {
             case KeyEvent.VK_W:
             case KeyEvent.VK_D:
             case KeyEvent.VK_S:
-                // When we get a movement key pressed we want to get
                 this.state = EntityState.STATE_WALKING;
                 player.setState(this.state);
                 WalkingState.update(player, kh.getDirectionalVector());
@@ -57,11 +54,5 @@ public class EntityStateManager {
                 break;
         }
 
-    }
-    private void handleEnemy(Enemy enemy){
-//        enemy.updateAnimation();
-    }
-    private void handlePassive(Passive passive){
-//        passive.updateAnimation();
     }
 }
