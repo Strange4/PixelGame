@@ -16,6 +16,9 @@ public class EntityManager {
         this.entities = new ArrayList<>();
     }
 
+    /*
+    * The ESM updates all entities on each tick and kills the dead enemy
+     */
     public void update(){
         for(int i=0;i<this.entities.size();i++){
             collides();
@@ -26,22 +29,32 @@ public class EntityManager {
         }
     }
 
+    /*
+    * This function checks if the player collides with a fruit and kills the fruit
+     */
     public void collides(){
         ArrayList<Enemy> enemies = getEnemies();
         Player player = getPlayer();
         for(Enemy enemy : enemies){
             if(collides(player, enemy)){
                 enemy.setState(EntityState.STATE_DEAD);
-                player.addPoint();
             }
         }
     }
 
+    /**
+     * @return An ArrayList of all the entities of the game
+     */
     public ArrayList<Entity> getEntities() {
         return entities;
     }
 
-    public void render(Graphics2D graphics2D, double scale){
+
+    /**
+     * Renders all the entities of the game
+     * @param graphics2D Graphics2D object
+     */
+    public void render(Graphics2D graphics2D){
         for(Entity entity : entities){
             BufferedImage img = entity.getCurrentFrame();
             graphics2D.drawImage(img, (int) entity.getX(), (int) entity.getY(), (int) (img.getWidth() * entity.getScale()), (int) (img.getHeight() * entity.getScale()), null);
@@ -56,10 +69,12 @@ public class EntityManager {
         this.entities.remove(e);
     }
 
-    public void removeEntity(int i){
-        this.entities.remove(i);
-    }
-
+    /**
+     * Returns if the player collides with an enemy
+     * @param player Player entity
+     * @param enemy Enemy entity
+     * @return if the entities collide or not
+     */
     public boolean collides(Player player, Enemy enemy){
         if((player.getX() + (player.getWIDTH() * player.getScale()))  > enemy.getX()  && player.getX() < (enemy.getX() + (enemy.getWIDTH() * enemy.getScale()))  && (player.getY() + (player.getHEIGHT() * player.getScale()))  > enemy.getY()  && player.getY()  < (enemy.getY() + (enemy.getHEIGHT() * enemy.getScale())) ) return true;
         return false;
