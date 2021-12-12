@@ -9,6 +9,10 @@ public abstract class Animated {
     protected final AnimationSpriteSheet spriteSheet;
     protected int currentAnimation = 0;
 
+    /**
+     * An animated abstract class that sets all the animations for an entity
+     * @param spriteSheet the animation spritesheet that is used to create the animation
+     */
     public Animated(AnimationSpriteSheet spriteSheet){
         this.spriteSheet = spriteSheet;
         if(spriteSheet.isSpritesByColumn()){
@@ -19,6 +23,11 @@ public abstract class Animated {
         loadAnimations();
     }
 
+    /**
+     * sets the delay between frames for a specific animation
+     * @param delayBetweenFrames the new delay
+     * @param animationNumber the animation that is updated
+     */
     public void setDelayBetweenFrames(int delayBetweenFrames, int animationNumber){
         animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
     }
@@ -29,10 +38,17 @@ public abstract class Animated {
         }
     }
 
+    /**
+     * updates the current animation playing
+     */
     public void updateAnimation(){
         animations[currentAnimation].update();
     }
 
+    /**
+     * changes the current animation playing
+     * @param animationNumber the new animation that is played
+     */
     public void changeAnimation(int animationNumber){
         for(int i=0;i<animations.length;i++){
             if(i != animationNumber){
@@ -42,14 +58,17 @@ public abstract class Animated {
         this.currentAnimation = animationNumber;
     }
 
+    /**
+     * gets the current frame of the current animation
+     * @return a bufferedimage of the animation frame
+     */
     public BufferedImage getCurrentFrame(){
         return animations[currentAnimation].getCurrentFrame();
     }
 
-    public void changeDelayForAnimation(int delayBetweenFrames, int animationNumber) {
-        animations[animationNumber].setDelayBetweenFrames(delayBetweenFrames);
-    }
-
+    /**
+     * resets all animations to their starting frames
+     */
     public void resetAnimations(){
         for(Animation a : animations){
             a.resetAnimation();
