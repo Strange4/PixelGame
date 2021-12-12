@@ -16,7 +16,7 @@ public class GameLayerManager {
 
     public GameLayerManager() {
         states = new ArrayList<>();
-        addState(new PlayLayer(this));
+        addState(new GameStartLayer(this));
     }
 
     public void addState(GameLayer state){
