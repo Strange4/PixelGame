@@ -19,6 +19,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private final KeyHandler keyHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
+    double lastUpdateTime = System.nanoTime();
 //    private EntityManager em;
 
     public GameCanvas(int width, int height) {
@@ -34,6 +35,8 @@ public class GameCanvas extends Canvas implements Runnable {
         addKeyListener(this.keyHandler);
 //        this.em = new EntityManager();
     }
+
+
 
     @Override
     public void addNotify() {
@@ -59,17 +62,7 @@ public class GameCanvas extends Canvas implements Runnable {
     @Override
     public void run() {
         init();
-        final double GAME_HERTZ = 60.0;
         final double BILLION = 1e9;
-        final double MIN_TIME_BEFORE_UPDATE = BILLION / GAME_HERTZ; // in nanoseconds
-        final int MIN_UPDATES_BEFORE_RENDER = 5;
-
-        double lastUpdateTime = System.nanoTime();
-
-        final double TARGET_FPS = 60;
-        final double TOTAL_TIME_BEFORE_RENDER = BILLION / TARGET_FPS; // in nanoseconds
-        double lastRenderTime;
-
         int frameCount = 0;
         int lastSecond = (int) (lastUpdateTime / BILLION);
         int oldFrameCount = 0;
@@ -78,6 +71,9 @@ public class GameCanvas extends Canvas implements Runnable {
             int updateCount = 0;
             // updates only when the allowed time before update has passed and the min
             // number of updates are done
+            double GAME_HERTZ = 60.0;
+            double MIN_TIME_BEFORE_UPDATE = BILLION / GAME_HERTZ;
+            int MIN_UPDATES_BEFORE_RENDER = 5;
             while ((now - lastUpdateTime) > MIN_TIME_BEFORE_UPDATE && (updateCount < MIN_UPDATES_BEFORE_RENDER)) {
                 input();
                 update();
@@ -85,14 +81,11 @@ public class GameCanvas extends Canvas implements Runnable {
                 lastUpdateTime += MIN_TIME_BEFORE_UPDATE;
                 updateCount++;
             }
-
             if (now - lastUpdateTime > MIN_TIME_BEFORE_UPDATE) {
                 lastUpdateTime = now - MIN_TIME_BEFORE_UPDATE;
             }
             input();
             render();
-
-            lastRenderTime = now;
             frameCount++;
 
             // Counting the fps each second
