@@ -11,11 +11,17 @@ public class MovementHandler {
         this.keyboard = keyboard;
     }
 
+    /**
+     * Retuns the unit vector representing the direction of
+     * the movement of the player as per keyboard input
+     * @return Vector2D unit vector representing the direction of the movement
+     */
     public Vector2D getDirectional2DVector() {
         // Resetting vector
         this.directional2DVector.setX(0);
         this.directional2DVector.setY(0);
         Key[] pressed = keyboard.getPressedKeys();
+        // Changing the directional vector depending on which key is pressed
         for (Key key : pressed) {
             switch (key.getKeyCode()) {
                 case KeyEvent.VK_W:

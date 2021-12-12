@@ -16,6 +16,7 @@ public class AbilityHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        // Updating the state of each key of the keyboard
         for (Key key : this.keyboard.acceptedKeys) {
             if (e.getKeyCode() == key.getKeyCode()) {
                 key.setIsPressed(true);
@@ -25,6 +26,7 @@ public class AbilityHandler implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // Updating the state of each key of the keyboard
         for (Key key : this.keyboard.acceptedKeys) {
             if (e.getKeyCode() == key.getKeyCode()) {
                 key.setIsPressed(false);
