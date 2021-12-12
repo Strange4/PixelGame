@@ -5,6 +5,7 @@ import game.keyboard.KeyHandler;
 import game.util.MouseHandler;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class GameOverLayer extends GameLayer{
     private final int score = calculateScore();
@@ -15,7 +16,7 @@ public class GameOverLayer extends GameLayer{
 
     private int calculateScore(){
         long currentTime = System.nanoTime();
-        long timeTaken = currentTime - GameCanvas.GAME_START;
+        long timeTaken = currentTime - this.glm.getPlayLayer().GAME_START;
         int score = (int) (timeTaken/1000000);
         return score;
     }
@@ -35,7 +36,10 @@ public class GameOverLayer extends GameLayer{
 
     @Override
     void input(MouseHandler mouse, KeyHandler kHandler) {
-
+        if(kHandler.getLastKey() != null && kHandler.getLastKey().getKeyCode() == KeyEvent.VK_ENTER){
+            this.glm.addState(new PlayLayer(this.glm));
+            this.glm.removeState(this);
+        }
     }
 
     @Override
@@ -49,5 +53,7 @@ public class GameOverLayer extends GameLayer{
         graphics2D.drawString("Time: " + scoreToString(), 300,150);
         graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 50));
         graphics2D.drawString("Congratulations", 220,200);
+        graphics2D.drawString("Press Enter to restart", 220,250);
+
     }
 }

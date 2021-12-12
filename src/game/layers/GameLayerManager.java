@@ -38,6 +38,15 @@ public class GameLayerManager {
         }
     }
 
+    public PlayLayer getPlayLayer(){
+        for(GameLayer state :states){
+            if(state instanceof PlayLayer playLayer){
+                return playLayer;
+            }
+        }
+        return null;
+    }
+
     public void input(MouseHandler mouse, KeyHandler kHandler){
         for (GameLayer state : states) {
             state.input(mouse, kHandler);

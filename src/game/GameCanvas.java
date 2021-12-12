@@ -12,7 +12,6 @@ import java.awt.image.BufferStrategy;
 public class GameCanvas extends Canvas implements Runnable {
     public final int width;
     public final int height;
-    public static final long GAME_START = System.nanoTime();
 
     private Thread thread;
     private boolean running;
@@ -29,7 +28,7 @@ public class GameCanvas extends Canvas implements Runnable {
         setFocusable(true);
         setVisible(true);
         // Keyboard Events Handler
-        Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q);
+        Keyboard keyboard = new Keyboard(KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_W, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE, KeyEvent.VK_Q, KeyEvent.VK_ENTER);
         this.keyHandler = KeyHandler.getInstance();
         this.keyHandler.init(keyboard);
         addKeyListener(this.keyHandler);

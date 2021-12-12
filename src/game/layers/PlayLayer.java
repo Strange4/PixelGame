@@ -23,6 +23,8 @@ public class PlayLayer extends GameLayer {
     private final EntityManager em;
     private final int DESPAWN_TICK = 50;
     private int CURRENT_DESPAWN = 0;
+    public final long GAME_START = System.nanoTime();
+
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
