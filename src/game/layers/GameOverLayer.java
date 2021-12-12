@@ -45,13 +45,13 @@ public class GameOverLayer extends GameLayer{
     @Override
     void render(Graphics2D graphics2D, int scale) {
         graphics2D.fillRect(0, 0,800,450);
-        graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 100));
+        graphics2D.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 100));
         graphics2D.setColor(Color.orange);
         graphics2D.drawString("GAME OVER", 100,100);
         graphics2D.setColor(Color.white);
-        graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 25));
+        graphics2D.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
         graphics2D.drawString("Time: " + scoreToString(), 300,150);
-        graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 50));
+        graphics2D.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
         graphics2D.drawString("Congratulations", 220,200);
         graphics2D.drawString("Press Enter to restart", 160,250);
     }
