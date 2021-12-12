@@ -18,6 +18,17 @@ public class TileSet {
     private final SpriteSheet sheet;
 
 
+    /**
+     * A tileset of tiles represented from a tmx file
+     * @param firstGid the id of the first tile
+     * @param name the name of the tileset
+     * @param tileWidth the width of each tile
+     * @param tileHeight the height of each tile
+     * @param nbColumns the number of columns of the tileset
+     * @param imageSource the source of the image containing the tileset
+     * @param imageWidth the width of the image
+     * @param imageHeight the height of the image
+     */
     public TileSet(int firstGid, String name, int tileWidth, int tileHeight, int nbColumns, String imageSource, int imageWidth, int imageHeight) {
         this.firstGid = firstGid;
         this.name = name;

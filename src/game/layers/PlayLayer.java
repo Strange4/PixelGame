@@ -32,7 +32,7 @@ public class PlayLayer extends GameLayer {
         tl = new TileMap("Maps/try#2.tmx");
         Player entity = new Player(playerSprite, new Vector2D(50, 50));
         entity.setDelayBetweenFrames(4,0);
-        camera = new Camera(entity,2,400, 225);
+        camera = new Camera(entity,400, 225);
         this.em = new EntityManager();
         this.em.addEntity(entity);
         for(int i = 0; i < 10; i++){
