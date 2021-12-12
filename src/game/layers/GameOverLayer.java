@@ -52,8 +52,7 @@ public class GameOverLayer extends GameLayer{
         graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 25));
         graphics2D.drawString("Time: " + scoreToString(), 300,150);
         graphics2D.setFont(new Font("TimesRoman", Font.BOLD, 50));
-        graphics2D.drawString("Congratulations", 220,200);
-        graphics2D.drawString("Press Enter to restart", 220,250);
-
+        graphics2D.drawString("Congratulations!", 220,200);
+        graphics2D.drawString("Press Enter to restart", 160,270);
     }
 }
