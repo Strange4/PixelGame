@@ -3,7 +3,7 @@ package game;
 import game.keyboard.KeyHandler;
 import game.keyboard.Keyboard;
 import game.layers.GameLayerManager;
-import game.util.MouseHandler;
+
 import java.awt.event.KeyEvent;
 
 import java.awt.*;
@@ -15,7 +15,6 @@ public class GameCanvas extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean running;
-    private MouseHandler mouse;
     private final KeyHandler keyHandler;
     private GameLayerManager gsm;
     private BufferStrategy bs;
@@ -48,7 +47,6 @@ public class GameCanvas extends Canvas implements Runnable {
     private void init() {
         running = true;
         createBufferStrategy(3);
-        mouse = new MouseHandler();
         gsm = new GameLayerManager();
         bs = getBufferStrategy();
     }
@@ -114,7 +112,7 @@ public class GameCanvas extends Canvas implements Runnable {
 
 
     private void input() {
-        gsm.input(mouse, keyHandler);
+        gsm.input(keyHandler);
     }
 
     /**

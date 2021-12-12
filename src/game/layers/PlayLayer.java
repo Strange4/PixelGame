@@ -9,7 +9,6 @@ import game.graphics.tilemap.TileMap;
 import game.entity.EntityManager;
 import game.entity.types.Enemy;
 import game.keyboard.KeyHandler;
-import game.util.MouseHandler;
 import game.util.Vector2D;
 
 import java.awt.*;
@@ -17,30 +16,31 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayLayer extends GameLayer {
-    private Entity entity;
-    private TileMap tl;
-    private Camera camera;
+    private final TileMap tl;
     private final EntityManager em;
-    private final int DESPAWN_TICK = 40;
     private int CURRENT_DESPAWN = 0;
     public final long GAME_START = System.nanoTime();
 
 
     public PlayLayer(GameLayerManager glm) {
         super(glm);
-        AnimationSpriteSheet playerSprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
         tl = new TileMap("Maps/try#2.tmx");
-        Player entity = new Player(playerSprite, new Vector2D(50, 50));
-        entity.setDelayBetweenFrames(4,0);
-        camera = new Camera(entity,400, 225);
         this.em = new EntityManager();
-        this.em.addEntity(entity);
-        for(int i = 0; i < 10; i++){
+        addPlayer();
+        // adds the randomly placed chorus fruits on the map
+        for(int i = 0; i < 12; i++){
             addRandomEntity();
         }
     }
 
-    public void addRandomEntity(){
+    private void addPlayer(){
+        AnimationSpriteSheet playerSprite = new AnimationSpriteSheet("Knight/KnightRun_strip.png", 96, 64, false, true);
+        Player entity = new Player(playerSprite, new Vector2D(50, 50));
+        entity.setDelayBetweenFrames(4,0);
+        this.em.addEntity(entity);
+    }
+
+    private void addRandomEntity(){
         AnimationSpriteSheet sprite = new AnimationSpriteSheet("Knight/chorus_fruit.png", 32, 32, false, true);
         Random r = new Random();
         Vector2D v = new Vector2D(r.nextInt(700),r.nextInt(400));
@@ -49,7 +49,7 @@ public class PlayLayer extends GameLayer {
         this.em.addEntity(enemy);
     }
 
-    public void killRandomEntity(){
+    private void killRandomEntity(){
         ArrayList<Enemy> enemyArrayList = new ArrayList<>();
         for(Entity entity : this.em.getEntities()){
             if(entity instanceof Enemy enemy){
@@ -67,10 +67,14 @@ public class PlayLayer extends GameLayer {
         this.glm.removeState(this);
     }
 
+    /**
+     * updates the player layer
+     */
     @Override
     public void update() {
         if(this.em.getEnemies().size() == 0) gameOver();
         this.CURRENT_DESPAWN++;
+        int DESPAWN_TICK = 40;
         if(CURRENT_DESPAWN == DESPAWN_TICK){
             CURRENT_DESPAWN = 0;
             addRandomEntity();
@@ -79,10 +83,18 @@ public class PlayLayer extends GameLayer {
         this.em.update();
     }
 
+    /**
+     * the keyhandlers are ignored int this layer because the EnitityMachine already does it
+     */
     @Override
-    public void input(MouseHandler mouse, KeyHandler keyHandler) {
+    public void input(KeyHandler keyHandler) {
     }
 
+    /**
+     * Renders the player layer
+     * @param graphics2D the graphics on which to render
+     * @param scale the scale to render
+     */
     @Override
     public void render(Graphics2D graphics2D, int scale) {
         this.em.setScale(scale);
