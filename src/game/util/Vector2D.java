@@ -33,19 +33,20 @@ public class Vector2D {
         this.y += y;
     }
 
+    /**
+     * Returns a new vector representing the addition of the current vector and the given one
+     * @param vector2D Vector2D vector to be added to current vector
+     * @return Vector2D resulting vector of addition of current and given vector
+     */
     public Vector2D add(Vector2D vector2D){
         return new Vector2D(vector2D.getX() + this.x, vector2D.getY() + this.y);
     }
 
     /**
-     * subtracts the vector given to the current vector and returns a new vector
-     * @param vector2D the vector to be subtracted from the current vector
-     * @return a new vector that is the subtraction the current vector minus the given vector
+     * Returns a new vector representing the result of the multiplication of the given scalar and current vector
+     * @param scalar double scalar
+     * @return Vector2D vector representing the result of the multiplication of current vector by given scalar
      */
-    public Vector2D subtract(Vector2D vector2D){
-        return new Vector2D(this.x - vector2D.getX(), this.y - vector2D.getY());
-    }
-
     public Vector2D multiplyScalar(double scalar) {
         return new Vector2D(this.x * scalar, this.y * scalar);
     }
