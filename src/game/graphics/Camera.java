@@ -9,35 +9,57 @@ import java.awt.image.BufferedImage;
 
 public class Camera {
     private Vector2D position; // the position of the camera in the map
-    private double acceleration;
-    private int renderDistanceX;
-    private int renderDistanceY;
+    private final int renderDistanceX;
+    private final int renderDistanceY;
 
-    public Camera(Vector2D position, double acceleration, int renderDistanceX, int renderDistanceY){
+    /**
+     * A camera object made to follow an entity
+     * @param position the position vector to follow
+     * @param renderDistanceX the distance width to render
+     * @param renderDistanceY the distance height to render
+     */
+    public Camera(Vector2D position, int renderDistanceX, int renderDistanceY){
         this.position = position;
-        this.acceleration = acceleration;
         this.renderDistanceX = renderDistanceX;
         this.renderDistanceY = renderDistanceY;
 
     }
-    public Camera(Entity entity, double acceleration, int renderDistanceX, int renderDistanceY){
+
+    /**
+     * A camera object made to follow an entity
+     * @param entity the entity to follow
+     * @param renderDistanceX the distance width to render
+     * @param renderDistanceY the distance height to render
+     */
+    public Camera(Entity entity, int renderDistanceX, int renderDistanceY){
         this.position = entity.getPosition();
-        this.acceleration = acceleration;
         this.renderDistanceX = renderDistanceX;
         this.renderDistanceY = renderDistanceY;
 
     }
 
+    /**
+     * makes the camera follow a new entity
+     * @param entity the new entity to follow
+     */
     public void followEntity(Entity entity){
         this.position = entity.getPosition();
     }
 
+    /**
+     * sets a new position vector to follow
+     * @param position the position vector to follow
+     */
     public void setPosition(Vector2D position){
         this.position = position;
     }
 
-    // the camera will not go out of bounds
-    public void renderMap(Graphics2D graphics2D, TileMap tileMap, int scale){
+    /**
+     * renders a tilemap based on the current followed enitity or position
+     * @param graphics2D the graphics on which to render
+     * @param tileMap the tilemap that is to be rendered
+     */
+    public void renderMap(Graphics2D graphics2D, TileMap tileMap){
         if(position.getX() < 0 || position.getY() < 0 || position.getX() > tileMap.getMapWidth() || position.getY() > tileMap.getMapHeight()){
             throw new IndexOutOfBoundsException("The camera cannot be out of bounds of the map");
         }
