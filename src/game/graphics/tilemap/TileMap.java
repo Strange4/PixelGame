@@ -1,6 +1,5 @@
 package game.graphics.tilemap;
 
-import game.util.Vector2D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -28,6 +27,10 @@ public class TileMap {
     private String currentFolder;
     private ArrayList<TileObjectGroup> objectGroups;
 
+    /**
+     * an object representation of a tileMap from Tiled Map Editor
+     * @param path the path of the tmx file
+     */
     public TileMap(String path){
         loadXMLFile(path);
         loadTileSets();
@@ -143,6 +146,16 @@ public class TileMap {
         throw new IllegalArgumentException("the tile with tid: "+tileId +" was not found");
     }
 
+    /**
+     * renders the map of a graphics2d object
+     * @param graphics2D the graphics to be rendered on
+     * @param posX the x position on which to render the graphics
+     * @param posY the y position on which to render the graphics
+     * @param mapPosX the x position of the map that is rendered
+     * @param mapPosY the y position of the map that is rendered
+     * @param renderDistanceX the width of the render distance
+     * @param renderDistanceY the height of the render distance
+     */
     public void render(Graphics2D graphics2D, int posX, int posY, int mapPosX, int mapPosY, int renderDistanceX, int renderDistanceY) {
         if(mapPosX - renderDistanceX > this.mapWidth * this.tileWidth){
             throw new IllegalArgumentException("the render distance x: "+renderDistanceX+", at mapPosX: "+ mapPosX+", is too small to see the map");
@@ -158,6 +171,14 @@ public class TileMap {
         graphics2D.drawImage(this.levelImage.getSubimage(renderFromX, renderFromY, renderWidth, renderHeight),posX-renderDistanceX, posY-renderDistanceY, renderWidth, renderHeight, null);
     }
 
+    /**
+     * gets a part of the map as an image
+     * @param mapPosX the x position of the map that is rendered
+     * @param mapPosY the y position of the map that is rendered
+     * @param width the width of the image taken
+     * @param height the height of the image taken
+     * @return the image of that part of the map
+     */
     public BufferedImage getMapImage(int mapPosX, int mapPosY, int width, int height){
         return this.levelImage.getSubimage(mapPosX, mapPosY, width, height);
     }
@@ -167,5 +188,9 @@ public class TileMap {
     }
     public int getMapHeight(){
         return this.mapHeight * tileHeight;
+    }
+
+    public ArrayList<TileObjectGroup> getObjectGroups() {
+        return objectGroups;
     }
 }

@@ -9,6 +9,12 @@ public class AnimationSpriteSheet extends SpriteSheet {
     private ArrayList<ArrayList<BufferedImage>> animationFrames;
     private final boolean spaceAdjusted;
     private final boolean spritesByColumn;
+
+    /**
+     * A specific kind of spritesheet designed for animation
+     * @param spritesByColumn determines if the sprites should be animated vertically or horizontally
+     * @param adjustForSpace if true adjusts the sprites to have no blank space (no transparent pixels)
+     */
     public AnimationSpriteSheet(String file, int spriteWidth, int spriteHeight, boolean spritesByColumn, boolean adjustForSpace) {
         super(file, spriteWidth, spriteHeight);
         this.spaceAdjusted = adjustForSpace;

@@ -12,6 +12,12 @@ public class SpriteSheet {
     protected int SPRITE_COL_COUNT;
     protected int SPRITE_ROW_COUNT;
 
+    /**
+     * A spritesheet containing sprites of same width and height
+     * @param file the path of the file containing the spritesheet image
+     * @param spriteWidth the width of each sprite
+     * @param spriteHeight the height of each sprite
+     */
     public SpriteSheet(String file, int spriteWidth, int spriteHeight){
         this.SPRITE_WIDTH = spriteWidth;
         this.SPRITE_HEIGHT = spriteHeight;
@@ -53,6 +59,12 @@ public class SpriteSheet {
         }
     }
 
+    /**
+     * gets a specific sprite from the spritesheet
+     * @param row the row of the sprite
+     * @param column the columns of the sprite
+     * @return the image of the sprite
+     */
     public BufferedImage getSprite(int row, int column){
         return ALL_SPRITES[row][column];
     }
