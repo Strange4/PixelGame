@@ -88,6 +88,6 @@ public class PlayLayer extends GameLayer {
         this.em.setScale(scale);
         this.em.getPlayer().setScale(scale);
         tl.render(graphics2D, 400,225, 500, 800, 400, 225);
-        this.em.render(graphics2D, scale);
+        this.em.render(graphics2D);
     }
 }

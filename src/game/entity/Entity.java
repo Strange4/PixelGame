@@ -23,10 +23,15 @@ public abstract class Entity extends Animated {
         this.esm = new EntityStateManager();
     }
 
+    /**
+     * Changes the entity's position
+     * @param movement Vector2D
+     */
     public void move(Vector2D movement){
         movement = movement.multiplyScalar(this.BASESPEED);
         this.lastMovement = movement;
         Vector2D newPosition =  this.position.add(movement);
+        // Collisions with map walls
         if(newPosition.getX() < 0) newPosition.setX(0);
         if(newPosition.getY() < 0) newPosition.setY(0);
         if(newPosition.getX() > 800 - (WIDTH * scale)) newPosition.setX(800 - (WIDTH * scale));
@@ -36,13 +41,6 @@ public abstract class Entity extends Animated {
 
     public EntityState getState(){return this.state;}
     public void setState(EntityState state){this.state = state;}
-
-    public void setModifiedSpeed(double speed){this.modifiedSpeed = speed;}
-    public double getModifiedSpeed(){return this.modifiedSpeed;}
-
-    public double getBASESPEED() {
-        return BASESPEED;
-    }
 
     public Vector2D getLastMovement() {
         return this.lastMovement;
