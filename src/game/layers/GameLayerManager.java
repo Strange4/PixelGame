@@ -1,17 +1,11 @@
 package game.layers;
 
 import game.keyboard.KeyHandler;
-import game.keyboard.MovementHandler;
-import game.util.MouseHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class GameLayerManager {
-    public static final int PLAY = 0;
-    public static final int MENU = 1;
-    public static final int PAUSE = 2;
-    public static final int GAME_OVER = 3;
     private final ArrayList<GameLayer> states;
 
     public GameLayerManager() {
@@ -47,9 +41,9 @@ public class GameLayerManager {
         return null;
     }
 
-    public void input(MouseHandler mouse, KeyHandler kHandler){
+    public void input(KeyHandler kHandler){
         for (GameLayer state : states) {
-            state.input(mouse, kHandler);
+            state.input(kHandler);
         }
     }
 

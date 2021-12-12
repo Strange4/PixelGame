@@ -1,7 +1,6 @@
 package game.layers;
 
 import game.keyboard.KeyHandler;
-import game.util.MouseHandler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,12 +12,12 @@ public class GameStartLayer extends GameLayer{
     }
 
     @Override
-    void update() {
+    public void update() {
 
     }
 
     @Override
-    void input(MouseHandler mouse, KeyHandler kHandler) {
+    public void input(KeyHandler kHandler) {
         if(kHandler.getLastKey() != null && kHandler.getLastKey().getKeyCode() == KeyEvent.VK_ENTER){
             this.glm.addState(new PlayLayer(this.glm));
             this.glm.removeState(this);
@@ -26,7 +25,7 @@ public class GameStartLayer extends GameLayer{
     }
 
     @Override
-    void render(Graphics2D graphics2D, int scale) {
+    public void render(Graphics2D graphics2D, int scale) {
         graphics2D.fillRect(0, 0,800,450);
         graphics2D.setColor(new Color(191, 64, 191));
         graphics2D.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
