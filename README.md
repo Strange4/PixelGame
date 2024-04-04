@@ -1,7 +1,6 @@
 # Chorus Grabber
 
-## Git repo
-LINK HERE
+![alt text](image.png)
 
 ## Important Notice
 
